@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>whatareyouuptoday — Silke Sonnenberg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">whatareyouuptoday</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mailto:silke@lecaid.com">Contact</a>
+    </div>
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mailto:silke@lecaid.com">Contact</a>
+  </div>
+
+  <main class="page">
+    <!-- Hero Text -->
+    <section class="content hero-text">
+      <h1>Creative direction for brand, product and systems, amplified by AI.</h1>
+      <p>AI can generate and accelerate, but it cannot decide what matters. I use it to move faster through possibilities, while human judgment, taste and intent shape the outcome.</p>
+    </section>
+
+    <!-- Project: AI Visual Design -->
+    <section class="content project-card">
+      <div class="project-info">
+        <p class="project-label">Brand identities and visual systems shaped through creative direction and AI exploration.</p>
+        <h2 class="project-title">Brand &amp; Visual Systems</h2>
+        <a href="ai.html" class="btn">Explore</a>
+        <div class="project-tags">
+          <span class="tag">art direction</span>
+          <span class="tag">generative imagery</span>
+          <span class="tag">visual systems</span>
+          <span class="tag">motion</span>
+          <span class="tag">storytelling</span>
+        </div>
+      </div>
+      <div class="project-img large">
+        <img src="images/project-artwork.webp" srcset="images/project-artwork.webp 2x" alt="abstract painting" width="580" height="580">
+      </div>
+    </section>
+
+    <!-- Project: AI Integration in Creative Workflows -->
+    <section class="content project-card">
+      <div class="project-info">
+        <p class="project-label">Human-led processes for faster ideation, prototyping and production.</p>
+        <h2 class="project-title">Creative AI Workflows</h2>
+        <a href="workflow.html" class="btn">Explore</a>
+        <div class="project-tags">
+          <span class="tag">workflow design</span>
+          <span class="tag">AI prototyping</span>
+          <span class="tag">creative systems</span>
+          <span class="tag">prompt systems</span>
+          <span class="tag">iteration</span>
+        </div>
+      </div>
+      <div class="project-img medium">
+        <img src="images/project-productivity.webp" srcset="images/project-productivity.webp 2x" alt="magazine spread" width="400" height="400">
+      </div>
+    </section>
+
+    <!-- Project: Agentic Design -->
+    <section class="content project-card reverse">
+      <div class="project-info">
+        <p class="project-label">Interfaces, logic and workflows shaped with AI assistance.</p>
+        <h2 class="project-title">Agentic Design Systems</h2>
+        <a href="agentic.html" class="btn">Explore</a>
+        <div class="project-tags">
+          <span class="tag">design systems</span>
+          <span class="tag">Figma MCP</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">prototyping</span>
+          <span class="tag">interface logic</span>
+        </div>
+      </div>
+      <div class="project-img large">
+        <img src="images/project-agentic.webp" srcset="images/project-agentic.webp 2x" alt="Agentic Design Systems" width="580" height="580">
+      </div>
+    </section>
+
+    <!-- Say Hi -->
+    <section class="content say-hi">
+      <h2>Let's shape what's next.</h2>
+      <p class="say-hi-text">Open for freelance projects, collaborations and AI-native creative systems.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="content footer">
+      <div class="footer-links">
+        <a href="mailto:silke@lecaid.com">Email</a>
+        <a href="https://www.instagram.com/whatareyouuptoday/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/silke-sonnenberg" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; Silke Sonnenberg 2026 All Rights Reserved</p>
+        <p><a href="imprint.html">Imprint</a></p>
+        <p><a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    });
+
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>

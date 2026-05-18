@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Integration in Creative Workflows — whatareyouuptoday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">whatareyouuptoday</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mailto:silke@lecaid.com">Contact</a>
+    </div>
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mailto:silke@lecaid.com">Contact</a>
+  </div>
+
+  <main class="page">
+    <!-- Header -->
+    <section class="content portfolio-header">
+      <div class="title-group">
+        <p class="subtitle">Creative AI Workflows</p>
+        <h1>Creative direction. AI acceleration. Stronger creative systems.</h1>
+      </div>
+      <p class="portfolio-intro">AI can accelerate the creative process, but direction makes it valuable. I design workflows where generative tools support research, exploration, iteration and production, while human taste, strategy and judgment shape the outcome.</p>
+    </section>
+
+    <!-- 01 — Visual exploration -->
+    <section class="content gallery-item wide">
+      <div class="gallery-img landscape-wide">
+        <img src="images/workflow-01.webp" srcset="images/workflow-01.webp 2x" alt="Visual exploration" width="980" height="654">
+      </div>
+      <div class="gallery-text">
+        <h2 class="heading">Visual exploration</h2>
+        <p class="body-copy">Rapid visual exploration through connected AI workflows and iterative creative direction.</p>
+      </div>
+    </section>
+
+    <!-- 02 — AI-Assisted Design Creation -->
+    <section class="content gallery-item wide">
+      <div class="gallery-img landscape">
+        <img src="images/workflow-02.webp" srcset="images/workflow-02.webp 2x" alt="AI-Assisted Design Creation" width="880" height="660">
+      </div>
+      <div class="gallery-text">
+        <h2 class="heading">AI-Assisted Design Creation</h2>
+        <p class="body-copy">From prompts to structured interfaces, directly inside collaborative design environments.</p>
+      </div>
+    </section>
+
+    <!-- 03 — From Design To Live Prototype -->
+    <section class="content gallery-item wide">
+      <div class="gallery-img landscape-wide">
+        <img src="images/workflow-03.webp" srcset="images/workflow-03.webp 2x" alt="From Design To Live Prototype" width="980" height="654">
+      </div>
+      <div class="gallery-text">
+        <h2 class="heading">From Design To Live Prototype</h2>
+        <p class="body-copy">Connected workflows that reduce friction between concept, interface and implementation.</p>
+      </div>
+    </section>
+
+    <!-- 04 — Idea Exploration -->
+    <section class="content gallery-item wide">
+      <div class="gallery-img fixed-medium">
+        <img src="images/workflow-04.webp" srcset="images/workflow-04.webp 2x" alt="Idea Exploration" width="862" height="500">
+      </div>
+      <div class="gallery-text">
+        <h2 class="heading">Idea Exploration</h2>
+        <p class="body-copy">AI-supported exploration for concepts, systems, narratives and creative direction.</p>
+      </div>
+    </section>
+
+    <!-- Mid text -->
+    <section class="content mid-text">
+      <p>AI accelerates exploration. Human direction shapes the outcome.</p>
+    </section>
+
+    <!-- Explore More -->
+    <section class="content explore-more">
+      <div class="explore-projects">
+        <div class="explore-project">
+          <div class="explore-project-info">
+            <p class="project-label">Brand identities and visual systems shaped through creative direction and AI exploration.</p>
+            <h3 class="project-title">Brand &amp; Visual Systems</h3>
+            <a href="ai.html" class="btn">Explore</a>
+          </div>
+          <div class="explore-project-img">
+            <img src="images/explore-ai-visual.webp" srcset="images/explore-ai-visual.webp 2x" alt="Brand and Visual Systems">
+          </div>
+        </div>
+        <div class="explore-project">
+          <div class="explore-project-info">
+            <p class="project-label">Interfaces, logic and workflows shaped with AI assistance.</p>
+            <h3 class="project-title">Agentic Design Systems</h3>
+            <a href="agentic.html" class="btn">Explore</a>
+          </div>
+          <div class="explore-project-img">
+            <img src="images/explore-agentic.webp" srcset="images/explore-agentic.webp 2x" alt="Agentic Design Systems">
+          </div>
+        </div>
+      </div>
+      <div class="explore-more-cta">
+        <p class="explore-more-heading">Let's shape what's next.</p>
+        <p class="explore-more-sub">Open for freelance projects, collaborations and AI-native creative systems.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="content footer">
+      <div class="footer-links">
+        <a href="mailto:silke@lecaid.com">Email</a>
+        <a href="https://www.instagram.com/whatareyouuptoday/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/silke-sonnenberg" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; Silke Sonnenberg 2026 All Rights Reserved</p>
+        <p><a href="imprint.html">Imprint</a></p>
+        <p><a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    });
+
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>

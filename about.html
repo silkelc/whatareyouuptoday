@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — whatareyouuptoday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">whatareyouuptoday</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mailto:silke@lecaid.com">Contact</a>
+    </div>
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mailto:silke@lecaid.com">Contact</a>
+  </div>
+
+  <main class="page">
+    <!-- About Bio -->
+    <section class="content about-bio">
+      <div class="about-intro">
+        <h1 class="about-headline">I connect creative direction, digital brand design and AI-native workflows to shape future-facing digital experiences.</h1>
+        <div class="about-body">
+          <p>With a background in digital products, brand experiences and scalable design systems, I connect visual strategy with user-centered product thinking.</p>
+          <p>My focus is on AI-native creative workflows, using generative tools, rapid prototyping and structured systems to expand what can be imagined, tested and built.</p>
+          <p>I'm currently completing the Master in Generative Artificial Intelligence for Creatives at LABASAD, Barcelona School of Arts and Design, where I explore how AI can support concept development, visual storytelling and future-facing digital products.</p>
+        </div>
+        <div class="about-skill">
+          <h2 class="about-skill-title">Creative Direction</h2>
+          <div class="project-tags">
+            <span class="tag">art direction</span>
+            <span class="tag">concept development</span>
+            <span class="tag">storytelling</span>
+            <span class="tag">visual systems</span>
+          </div>
+        </div>
+        <div class="about-skill">
+          <h2 class="about-skill-title">Digital Brand &amp; Product Design</h2>
+          <div class="project-tags">
+            <span class="tag">branding</span>
+            <span class="tag">corporate design</span>
+            <span class="tag">UX/UI</span>
+            <span class="tag">app &amp; web design</span>
+            <span class="tag">design systems</span>
+          </div>
+        </div>
+        <div class="about-skill">
+          <h2 class="about-skill-title">AI-Native Workflows</h2>
+          <div class="project-tags">
+            <span class="tag">generative imagery</span>
+            <span class="tag">motion</span>
+            <span class="tag">prompt systems</span>
+            <span class="tag">creative workflow design</span>
+            <span class="tag">AI-assisted prototyping</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portrait -->
+    <section class="content about-now">
+      <div class="about-now-left"></div>
+      <div class="about-now-right">
+        <div class="about-portrait">
+          <img src="images/about-portrait.webp" alt="Silke Sonnenberg">
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore More -->
+    <section class="content explore-more">
+      <div class="explore-projects">
+        <div class="explore-project">
+          <div class="explore-project-info">
+            <p class="project-label">Brand identities and visual systems shaped through creative direction and AI exploration.</p>
+            <h3 class="project-title">Brand &amp; Visual Systems</h3>
+            <a href="ai.html" class="btn">Explore</a>
+          </div>
+          <div class="explore-project-img">
+            <img src="images/explore-ai-visual.webp" alt="Brand and Visual Systems">
+          </div>
+        </div>
+        <div class="explore-project">
+          <div class="explore-project-info">
+            <p class="project-label">Human-led processes for faster ideation, prototyping and production.</p>
+            <h3 class="project-title">Creative AI Workflows</h3>
+            <a href="workflow.html" class="btn">Explore</a>
+          </div>
+          <div class="explore-project-img">
+            <img src="images/explore-ai-workflows.webp" alt="Creative AI Workflows">
+          </div>
+        </div>
+        <div class="explore-project">
+          <div class="explore-project-info">
+            <p class="project-label">Interfaces, logic and workflows shaped with AI assistance.</p>
+            <h3 class="project-title">Agentic Design Systems</h3>
+            <a href="agentic.html" class="btn">Explore</a>
+          </div>
+          <div class="explore-project-img">
+            <img src="images/explore-agentic.webp" alt="Agentic Design Systems">
+          </div>
+        </div>
+      </div>
+      <div class="explore-more-cta">
+        <p class="explore-more-heading">Let's shape what's next.</p>
+        <p class="explore-more-sub">Open for freelance projects, collaborations and AI-native creative systems.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="content footer">
+      <div class="footer-links">
+        <a href="mailto:silke@lecaid.com">Email</a>
+        <a href="https://www.instagram.com/whatareyouuptoday/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/silke-sonnenberg" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; Silke Sonnenberg 2026 All Rights Reserved</p>
+        <p><a href="imprint.html">Imprint</a></p>
+        <p><a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    });
+
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>

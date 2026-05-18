@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "whatareyouuptoday",
+      "runtimeExecutable": "npx",
+      "cwd": "/Users/sille/Desktop/Claude-Projekte/whatareyouuptoday",
+      "runtimeArgs": ["serve", "."],
+      "autoPort": true
+    }
+  ]
+}
