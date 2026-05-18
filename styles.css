@@ -2,6 +2,31 @@
    whatareyouuptoday — Portfolio Styles
    ========================================== */
 
+/* Self-hosted Rubik (GDPR compliant — no Google Fonts CDN requests) */
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/rubik-latin.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/rubik-latin.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/rubik-latin.woff2) format('woff2');
+}
+
 /* Reset & Base */
 *, *::before, *::after {
   margin: 0;
