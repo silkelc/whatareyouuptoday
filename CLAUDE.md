@@ -1,81 +1,72 @@
-# whatareyouuptoday — Portfolio Website
+# whatareyouuptoday — Project Guide for Claude Code
 
-## Project overview
-Portfolio website for Silke Sonnenberg. Vanilla HTML/CSS/JS, no frameworks, no build tools. Served with `npx serve` on localhost:3458.
+Last updated: 18 May 2026
 
-Figma source: https://www.figma.com/design/Miw8cTJB8qJuchYeHNHatE/whatareyouuptoday-website
+## Project Overview
 
-## Tech stack
-- Vanilla HTML, CSS, JS (no React, no Tailwind)
-- Font: Rubik (Google Fonts) — weights 300 (light/captions), 400 (regular/body/links), 600 (semibold/headings)
-- Colors: white background, black text, yellow accent `#fbff01`
-- Images: local 2x retina WebP files in `images/`
-- Responsive breakpoints: 1024px (tablet), 768px (mobile)
+Personal portfolio website for Silke Sonnenberg.
+Live at: https://whatareyouuptoday.com
+Stack: Static HTML, CSS, vanilla JS. No framework.
+Deployed on Vercel, auto-deploy on push to main.
 
-## Pages
-- `index.html` — Homepage with hero, 3 project cards, Say Hi CTA, footer
-- `about.html` — Bio headline, 3 body paragraphs, 3 capability blocks with tags, portrait, Explore More (3 cards), footer
-- `ai.html` — Brand & Visual Systems subpage (gallery layout)
-- `workflow.html` — Creative AI Workflows subpage (gallery layout)
-- `agentic.html` — Agentic Design Systems subpage (gallery layout)
-- `motion.html` — Motion subpage (NOT yet updated with new copy or local images, still has Figma API URLs)
-- `styles.css` — All styles in one file
+## Critical Rules (do not break these)
 
-## Figma-to-code workflow
-Figma MCP tools (`get_design_context`, `get_metadata`) output React/Tailwind. Always convert to vanilla HTML/CSS matching existing patterns.
+### Fonts
+- **Never load fonts from external CDNs** (no Google Fonts `<link>` tags, no `@import` from googleapis.com).
+- Rubik is self-hosted at `fonts/rubik-latin.woff2`, loaded via `@font-face` in `styles.css`.
+- If a new font is needed: download the `.woff2` file, place it in `fonts/`, add an `@font-face` declaration. Never link to a CDN.
+- Reason: German GDPR rulings (LG München 2022) make external font loading a legal risk.
 
-## Image pipeline
-1. Download from Figma API
-2. Check actual file type (`file --mime-type`) — Figma often mislabels formats
-3. Convert to PNG if needed
-4. Resize to 2x retina (display size x 2) with `sips -Z` (sips cannot resize WebP directly — convert to PNG first with `dwebp`)
-5. Convert to WebP with `cwebp -q 80`
+### Third-party scripts
+- Only Vercel Web Analytics (`/_vercel/insights/script.js`) and Vercel Speed Insights (`/_vercel/speed-insights/script.js`) are permitted.
+- Any other third-party script (analytics, chat widget, embed, image CDN) requires:
+  1. Explicit user approval
+  2. A privacy policy update before the script goes live
 
-## Gallery layout patterns
-Layout classes on `<section class="content gallery-item {alignment}">`:
-- `.center`, `.left`, `.right`, `.wide`, `.medium-center`, `.medium-left`
+### Social media
+- Instagram and LinkedIn are plain HTML links only.
+- Never add embedded widgets, follow buttons, or social plugins (they load third-party trackers).
 
-Image aspect classes on `<div class="gallery-img {aspect}">`:
-- `.portrait`, `.landscape`, `.landscape-wide`, `.wide-cinema`, `.full-wide`, `.square`, `.fixed-medium`
+### Hosting
+- Stay on Vercel. The privacy policy specifically references Vercel as the hosting provider.
+- Do not introduce additional services (Cloudflare, image CDN, form backend) without updating the privacy policy first.
 
-## Explore More component
-Each subpage has an Explore More section with 2 cards linking to the other subpages + a CTA block below ("Let's shape what's next."). The about page has 3 cards (all subpages). Structure:
-```html
-<section class="content explore-more">
-  <div class="explore-projects">
-    <div class="explore-project">
-      <div class="explore-project-info">
-        <p class="project-label">Subline description</p>
-        <h3 class="project-title">Category Name</h3>
-        <a href="page.html" class="btn">Explore</a>
-      </div>
-      <div class="explore-project-img">
-        <img src="images/explore-*.webp" ...>
-      </div>
-    </div>
-  </div>
-  <div class="explore-more-cta">
-    <p class="explore-more-heading">Let's shape what's next.</p>
-    <p class="explore-more-sub">Open for freelance projects, collaborations and AI-native creative systems.</p>
-  </div>
-</section>
-```
+## File Structure Conventions
 
-## Canonical copy source
-`/Users/sille/Jobs/26001_BrandNew/website_screens/whatareyouuptoday_website_copy_summary.md`
+- 8 HTML pages total (index, about, privacy, imprint, and project subpages).
+- Single `styles.css` file for all styling.
+- Fonts in `fonts/`.
+- Images in their existing folders (do not move without checking all references).
 
-## Copy rules
-- No em dashes in copywriting
-- Do not invent copy — only use text from the markdown or Figma
-- Do not change image captions (those come from Figma)
+## Privacy Policy
 
-## What's done
-- All pages have local 2x retina WebP images (replaced expired Figma API URLs)
-- Copy updated on all pages (index, about, ai, workflow, agentic) from canonical markdown
-- Mobile burger menu with fullscreen overlay on all pages
-- Explore More sections restructured to match latest Figma (cards first, CTA below)
+Located at `privacy.html`. Current section structure:
+1. Overview
+2. Controller
+3. General Information
+4. Hosting (Vercel)
+5. Web Analytics and Speed Insights (Vercel)
+6. Fonts, Images, and Videos
+7. Social Media Links
+8. Contact by Email
+9. Cookies and Tracking
+10. SSL/TLS Encryption
+11. Your Rights
+12. Right to Lodge a Complaint
+13. Changes to This Privacy Policy
 
-## What's remaining
-- `motion.html` — still has old copy, 2 placeholder `href="#"` links, and Figma API image URLs that will expire
-- General QA: responsive testing, cross-browser checks
-- Deployment (Vercel or similar)
+If you add, remove, or change any data-processing functionality on the site, update the privacy policy in the same commit.
+
+## Open Tasks
+
+- Imprint review for TMG Section 5 compliance
+- SEO basics: title tags, meta descriptions, Open Graph image
+- Favicon in all standard sizes
+- robots.txt and sitemap.xml
+- Custom 404 page verification
+
+## Tone and Copy
+
+- No em dashes in copy (use commas, periods, colons, brackets, hyphens instead).
+- Avoid generic AI buzzwords (AI integration, AI expert, prompt designer).
+- Preferred language: AI-native workflows, creative direction, human-led processes, systems thinking.
