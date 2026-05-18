@@ -629,7 +629,7 @@ img {
 }
 
 .gallery-item.wide {
-  align-items: center;
+  align-items: flex-start;
 }
 
 .gallery-item.medium-left {
