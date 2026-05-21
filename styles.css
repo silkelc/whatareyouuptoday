@@ -792,6 +792,36 @@ img {
   width: 565px;
   flex-shrink: 0;
   border-top: 0.75px solid #000;
+  padding-top: 200px;
+  padding-bottom: 80px;
+}
+
+.about-now-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.about-now-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.03;
+  letter-spacing: -0.72px;
+}
+
+.about-now-heading {
+  font-weight: 600;
+  font-size: 52px;
+  line-height: 1.2;
+  letter-spacing: -2.34px;
+}
+
+.about-now-body {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.99px;
 }
 
 .about-now-right {
@@ -969,6 +999,13 @@ img {
 
   .about-now-left {
     width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .about-now-heading {
+    font-size: 38px;
+    letter-spacing: -1.71px;
   }
 
   .about-portrait {
@@ -1164,7 +1201,13 @@ img {
 
   .about-now-left {
     width: 100%;
-    display: none;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .about-now-heading {
+    font-size: 30px;
+    letter-spacing: -1.35px;
   }
 
   .about-portrait {
