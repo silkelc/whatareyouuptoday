@@ -43,7 +43,7 @@
     </section>
 
     <!-- Image 01 — centered portrait -->
-    <section class="content gallery-item center">
+    <section class="content gallery-item center reveal">
       <div class="gallery-img portrait">
         <img src="images/ai-visual-opera.webp" srcset="images/ai-visual-opera.webp 2x" alt="man walking in front of textured wall" width="1400" height="1864">
       </div>
@@ -51,7 +51,7 @@
     </section>
 
     <!-- Image 02 — left aligned landscape -->
-    <section class="content gallery-item left">
+    <section class="content gallery-item left reveal">
       <div class="gallery-img landscape">
         <img src="images/ai-installation.webp" srcset="images/ai-installation.webp 2x" alt="crowd of people on a town square" width="1760" height="1320">
       </div>
@@ -59,7 +59,7 @@
     </section>
 
     <!-- Image 03 — right aligned wide -->
-    <section class="content gallery-item right">
+    <section class="content gallery-item right reveal">
       <div class="gallery-img landscape-wide">
         <img src="images/ai-character.webp" srcset="images/ai-character.webp 2x" alt="people playing basketball outside" width="1960" height="1309">
       </div>
@@ -67,12 +67,12 @@
     </section>
 
     <!-- Mid text -->
-    <section class="content mid-text">
+    <section class="content mid-text reveal">
       <p>Brand identities and visual systems, led by creative direction, expanded through AI.</p>
     </section>
 
     <!-- Image 04 — full width -->
-    <section class="content gallery-item wide">
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img full-wide">
         <img src="images/ai-stage.webp" srcset="images/ai-stage.webp 2x" alt="man taking a photo on a wharf" width="2360" height="1367">
       </div>
@@ -80,7 +80,7 @@
     </section>
 
     <!-- Video 05 — centered square -->
-    <section class="content gallery-item medium-center">
+    <section class="content gallery-item medium-center reveal">
       <div class="gallery-img square">
         <video autoplay loop muted playsinline style="object-fit: contain; width: 100%; height: 100%;">
           <source src="videos/ai-typelogo.mp4" type="video/mp4">
@@ -90,7 +90,7 @@
     </section>
 
     <!-- Image 06 — full width cinema -->
-    <section class="content gallery-item wide">
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img wide-cinema">
         <img src="images/ai_visual_board.webp" srcset="images/ai_visual_board.webp 2x" alt="Visual exploration board with AI-generated imagery and creative direction" width="2360" height="1286">
       </div>
@@ -98,7 +98,7 @@
     </section>
 
     <!-- Explore More -->
-    <section class="content explore-more">
+    <section class="content explore-more reveal">
       <div class="explore-projects">
         <div class="explore-project">
           <div class="explore-project-info">
@@ -159,6 +159,17 @@
         document.body.style.overflow = '';
       });
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>

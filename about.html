@@ -75,7 +75,7 @@
     </section>
 
     <!-- Portrait -->
-    <section class="content about-now">
+    <section class="content about-now reveal">
       <div class="about-now-left">
         <div class="about-now-text">
           <p class="about-now-label">Le Caid Design Collective</p>
@@ -92,7 +92,7 @@
     </section>
 
     <!-- Explore More -->
-    <section class="content explore-more">
+    <section class="content explore-more reveal">
       <div class="explore-projects">
         <div class="explore-project">
           <div class="explore-project-info">
@@ -163,6 +163,17 @@
         document.body.style.overflow = '';
       });
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>

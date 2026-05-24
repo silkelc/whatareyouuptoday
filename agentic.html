@@ -43,7 +43,7 @@
     </section>
 
     <!-- 01 — System Foundations -->
-    <section class="content gallery-item right">
+    <section class="content gallery-item right reveal">
       <div class="gallery-img landscape-wide">
         <img src="images/agentic-01.webp" srcset="images/agentic-01.webp 2x" alt="System Foundations" width="980" height="654">
       </div>
@@ -54,7 +54,7 @@
     </section>
 
     <!-- 02 — AI-Assisted System Creation -->
-    <section class="content gallery-item left">
+    <section class="content gallery-item left reveal">
       <div class="gallery-img landscape">
         <img src="images/agentic-02.webp" srcset="images/agentic-02.webp 2x" alt="AI-Assisted System Creation" width="880" height="660">
       </div>
@@ -65,7 +65,7 @@
     </section>
 
     <!-- 03 — Design > < Development Workflows -->
-    <section class="content gallery-item right">
+    <section class="content gallery-item right reveal">
       <div class="gallery-img landscape-wide">
         <img src="images/agentic-03.webp" srcset="images/agentic-03.webp 2x" alt="Design and Development Workflows" width="980" height="654">
       </div>
@@ -76,7 +76,7 @@
     </section>
 
     <!-- 04 — Governance & Scalability -->
-    <section class="content gallery-item wide">
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img fixed-medium">
         <img src="images/agentic-04.webp" srcset="images/agentic-04.webp 2x" alt="Governance and Scalability" width="862" height="500">
       </div>
@@ -87,12 +87,12 @@
     </section>
 
     <!-- Mid text -->
-    <section class="content mid-text">
+    <section class="content mid-text reveal">
       <p>AI accelerates systems. Human judgment maintains clarity and consistency.</p>
     </section>
 
     <!-- Explore More -->
-    <section class="content explore-more">
+    <section class="content explore-more reveal">
       <div class="explore-projects">
         <div class="explore-project">
           <div class="explore-project-info">
@@ -153,6 +153,17 @@
         document.body.style.overflow = '';
       });
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>

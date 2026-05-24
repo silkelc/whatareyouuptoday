@@ -43,7 +43,7 @@
     </section>
 
     <!-- 01 — Visual exploration -->
-    <section class="content gallery-item wide">
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img landscape-wide">
         <img src="images/workflow-01.webp" srcset="images/workflow-01.webp 2x" alt="Visual exploration" width="980" height="654">
       </div>
@@ -54,7 +54,7 @@
     </section>
 
     <!-- 02 — From single outputs to connected visual systems -->
-    <section class="content gallery-item wide">
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img landscape">
         <img src="images/workflow-02.webp" srcset="images/workflow-02.webp 2x" alt="Node-based workflow in Weavy showing character sheet creation with connected prompts, models and enhancers" width="880" height="660">
       </div>
@@ -64,35 +64,26 @@
       </div>
     </section>
 
-    <!-- 03 — From Design To Live Prototype -->
-    <section class="content gallery-item wide">
+    <!-- 03 — Where AI helps, phase by phase -->
+    <section class="content gallery-item wide reveal">
       <div class="gallery-img landscape-wide">
         <img src="images/workflow-03.webp" srcset="images/workflow-03.webp 2x" alt="The COOK Framework, a modular creative workflow board with phases for Prepare, Ingredients, Recipe and Cook" width="980" height="654">
       </div>
       <div class="gallery-text">
-        <h2 class="heading">From Design To Live Prototype</h2>
-        <p class="body-copy">Connected workflows that reduce friction between concept, interface and implementation.</p>
-      </div>
-    </section>
-
-    <!-- 04 — Idea Exploration -->
-    <section class="content gallery-item wide">
-      <div class="gallery-img fixed-medium">
-        <img src="images/workflow-04.webp" srcset="images/workflow-04.webp 2x" alt="Idea exploration board with character concepts, moodboards, story structure and visual development" width="862" height="500">
-      </div>
-      <div class="gallery-text">
-        <h2 class="heading">Idea Exploration</h2>
-        <p class="body-copy">AI-supported exploration for concepts, systems, narratives and creative direction.</p>
+        <h2 class="heading">Where AI helps, phase by phase.</h2>
+        <p class="body-copy">The COOK Framework started as a question about my own workflow: at which phases does AI genuinely support the work, and where does human direction need to lead? I broke my process into phases and tested each one, refining the result into a modular system.</p>
+        <p class="body-copy">To put it into practice, I prototyped it in Figma Make and connected it to Supabase, so the framework stays editable and expandable. An AI Boost Assistant sits inside each phase, offering prompts and inspiration where AI can actually move the work forward.</p>
+        <p class="body-copy">Open framework, built to keep evolving with the work.</p>
       </div>
     </section>
 
     <!-- Mid text -->
-    <section class="content mid-text">
+    <section class="content mid-text reveal">
       <p>AI accelerates exploration. Human direction shapes the outcome.</p>
     </section>
 
     <!-- Explore More -->
-    <section class="content explore-more">
+    <section class="content explore-more reveal">
       <div class="explore-projects">
         <div class="explore-project">
           <div class="explore-project-info">
@@ -153,6 +144,17 @@
         document.body.style.overflow = '';
       });
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
