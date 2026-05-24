@@ -709,6 +709,11 @@ img {
   gap: 8px;
 }
 
+.gallery-item.right .gallery-text,
+.gallery-item.right .gallery-caption {
+  align-self: stretch;
+}
+
 /* ==========================================
    Portfolio Page — Mid Text
    ========================================== */
