@@ -1,6 +1,6 @@
 # whatareyouuptoday — Project Guide for Claude Code
 
-Last updated: 18 May 2026
+Last updated: 27 May 2026
 
 ## Project Overview
 
@@ -31,12 +31,158 @@ Deployed on Vercel, auto-deploy on push to main.
 - Stay on Vercel. The privacy policy specifically references Vercel as the hosting provider.
 - Do not introduce additional services (Cloudflare, image CDN, form backend) without updating the privacy policy first.
 
-## File Structure Conventions
+## File Structure
 
-- 8 HTML pages total (index, about, privacy, imprint, and project subpages).
-- Single `styles.css` file for all styling.
-- Fonts in `fonts/`.
-- Images in their existing folders (do not move without checking all references).
+```
+/
+├── index.html          # Homepage
+├── about.html          # About page
+├── branding.html       # Brand & Visual Systems portfolio
+├── workflow.html       # Creative AI Workflows portfolio
+├── agentic.html        # Agentic Design Systems portfolio
+├── privacy.html        # Privacy policy (GDPR)
+├── imprint.html        # Legal imprint
+├── styles.css          # Single stylesheet for all pages
+├── fonts/
+│   └── rubik-latin.woff2
+├── images/
+│   ├── carousel_branding/   # 8 branding slideshow images (01-08-branding.webp)
+│   └── *.webp               # All other images
+└── videos/
+    ├── ai-typelogo.mp4      # Branding page type logo animation (496KB)
+    ├── flow.mp4             # Workflow teaser video (1.1MB)
+    ├── loader.mp4           # Agentic teaser video (899KB)
+    ├── workflow-cook.mp4    # COOK Framework walkthrough (19MB)
+    ├── workflow-ds.mp4      # Design system walkthrough (11MB)
+    ├── workflow-system.mp4  # System foundations walkthrough (20MB)
+    └── workflow-claudecode.mp4  # Claude Code workflow (24MB)
+```
+
+## Design Tokens (from Figma)
+
+- `element-gap-md`: 20px
+- `element-gap-xl`: 48px
+- `card-gap`: 50px
+- `page-padding`: 50px
+
+## Navigation
+
+- Desktop nav: Home, About, Contact (top right)
+- Mobile burger menu (6 links): Home, Branding, AI Workflows, Agentic Design, About, Contact
+- Mobile overlay font: 42px, underline on hover only
+
+## Video Patterns
+
+### Self-hosted videos (no external CDNs)
+All videos are self-hosted in `/videos/` as compressed MP4. Never use YouTube embeds or external video CDNs.
+
+### Compression workflow
+- Source videos are `.mov` files in the main project `/videos/` folder
+- Compress with: `avconvert --preset PresetHighestQuality --source input.mov --output output.mp4`
+- Available presets: `PresetMediumQuality` (smallest), `PresetHighestQuality` (best quality). No middle ground.
+- User preference: highest quality unless file size is a concern
+
+### Video HTML pattern
+```html
+<video autoplay loop muted playsinline poster="images/fallback.webp"
+       style="object-fit: contain; width: 100%; height: 100%; border-radius: 4px;">
+  <source src="videos/filename.mp4" type="video/mp4">
+</video>
+```
+- Always include `poster` attribute with the original image as fallback
+- Always use `autoplay loop muted playsinline` for background videos
+- Use `object-fit: contain` to show full video without cropping
+- Match container `aspect-ratio` to the video's native dimensions when replacing fixed-ratio containers
+
+### Transparent background videos
+For videos with white/grey backgrounds that need to blend into the page:
+```html
+style="mix-blend-mode: multiply;
+       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%);
+       mask-image: linear-gradient(to bottom, transparent 0%, black 5%);"
+```
+- `mix-blend-mode: multiply` makes white areas transparent
+- Mask gradient fades edges (3-5% depending on the video)
+- For all-edge fade, use intersecting masks:
+```css
+-webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent),
+                    linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+-webkit-mask-composite: destination-in;
+mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent),
+            linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+mask-composite: intersect;
+```
+
+## CSS Carousel (Crossfade Slideshow)
+
+Pure CSS, no JavaScript, GPU-accelerated via opacity animation.
+
+```html
+<div class="carousel">
+  <img src="images/carousel_branding/01-branding.webp" alt="Brand visual 1">
+  <!-- ... up to 8 images -->
+</div>
+```
+
+```css
+.carousel { position: relative; width: 100%; height: 100%; }
+.carousel img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0;
+  animation: carousel-fade 8s infinite;
+}
+.carousel img:nth-child(1) { animation-delay: 0s; }
+/* each subsequent child: +1s delay */
+```
+- Currently set to 1s per image, 8s full cycle
+- Used on: homepage (Brand & Visual Systems), agentic teasers, workflow teasers
+
+## Image Conversion
+
+- Convert images to WebP: `cwebp -q 100 input.png -o output.webp`
+- User preference: 100% quality for portfolio images, 90% for carousel/teaser images
+- Always use `.webp` format for the site
+
+## Nav Logo Animation
+
+The yellow dot in the nav has a CSS morph animation:
+- `animation: morph 6s ease-in-out infinite`
+- Radial gradient: `#fbff01` (yellow) center to transparent
+- Gentle shape morphing via border-radius and scale changes
+
+## Button Patterns
+
+### Single button (left-aligned, hug content)
+```html
+<a href="url" class="btn" target="_blank" rel="noopener">Label</a>
+```
+- `.gallery-text` has `align-items: flex-start` to prevent button stretching
+
+### Multiple buttons in a row
+```html
+<div class="btn-row">
+  <a href="url1" class="btn">Button 1</a>
+  <a href="url2" class="btn">Button 2</a>
+</div>
+```
+- `.btn-row`: `display: flex; flex-wrap: wrap; gap: 16px;`
+- Spacing from text above: `margin-top: 12px` (+ 8px gap = 20px element-gap-md)
+
+## Git Workflow
+
+- Work on feature branch (e.g. `claude/jolly-wiles-bafaab`)
+- Squash merge PRs to main via `gh pr merge --squash`
+- Delete feature branch after merge
+- Vercel auto-deploys on push to main
+- Squash merges cause branch divergence: rebase before merging if conflicts arise
+
+## Repo Size Awareness
+
+- GitHub max: 100MB per file, recommended repo size under 1GB
+- Vercel: Free plan 1GB deployment size, Pro 10GB
+- Current videos total ~77MB, monitor as more are added
+- Consider Git LFS or Vercel Blob if repo exceeds 500MB
 
 ## Privacy Policy
 
