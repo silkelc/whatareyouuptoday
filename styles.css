@@ -719,7 +719,19 @@ img {
 .gallery-text {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
+}
+
+.gallery-text .btn,
+.gallery-text .btn-row {
+  margin-top: 12px; /* 8px gap + 12px = 20px (element-gap-md) */
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .gallery-item.right .gallery-text,
