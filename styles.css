@@ -227,9 +227,13 @@ img {
 
 .mobile-overlay a {
   font-weight: 600;
-  font-size: 50px;
+  font-size: 42px;
   line-height: 1.2;
-  letter-spacing: -2.25px;
+  letter-spacing: -1.89px;
+  text-decoration: none;
+}
+
+.mobile-overlay a:hover {
   text-decoration: underline;
 }
 
