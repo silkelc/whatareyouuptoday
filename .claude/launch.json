@@ -4,7 +4,7 @@
     {
       "name": "whatareyouuptoday",
       "runtimeExecutable": "npx",
-      "cwd": "/Users/sille/Desktop/Claude-Projekte/whatareyouuptoday",
+      "cwd": ".",
       "runtimeArgs": ["serve", "."],
       "autoPort": true
     }
