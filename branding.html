@@ -181,6 +181,8 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('video source[src*="flow.mp4"]').forEach(s => { s.parentElement.playbackRate = 2; });
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
