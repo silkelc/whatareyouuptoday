@@ -842,6 +842,10 @@ img {
   gap: 0;
 }
 
+.about-body .about-break {
+  margin-bottom: 24px;
+}
+
 .about-skill {
   display: flex;
   flex-direction: column;
@@ -1181,8 +1185,7 @@ img {
   }
 
   .caption-2,
-  .project-label,
-  .frame-skill p {
+  .project-label {
     font-size: 14px;
   }
 
@@ -1304,6 +1307,10 @@ img {
   .about-body {
     font-size: 18px;
     letter-spacing: -0.81px;
+  }
+
+  .about-body + .about-skill {
+    margin-top: 48px;
   }
 
   .about-now {
