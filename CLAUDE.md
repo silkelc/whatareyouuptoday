@@ -1,6 +1,6 @@
 # whatareyouuptoday — Project Guide for Claude Code
 
-Last updated: 27 May 2026
+Last updated: 3 June 2026
 
 ## Project Overview
 
@@ -43,6 +43,12 @@ Deployed on Vercel, auto-deploy on push to main.
 ├── privacy.html        # Privacy policy (GDPR)
 ├── imprint.html        # Legal imprint
 ├── styles.css          # Single stylesheet for all pages
+├── favicon.ico         # Favicon 32x32
+├── favicon.svg         # SVG favicon
+├── favicon-16x16.png   # 16px favicon
+├── favicon-32x32.png   # 32px favicon
+├── apple-touch-icon.png # Apple touch icon
+├── site.webmanifest    # Web app manifest
 ├── fonts/
 │   └── rubik-latin.woff2
 ├── images/
@@ -67,9 +73,18 @@ Deployed on Vercel, auto-deploy on push to main.
 
 ## Navigation
 
-- Desktop nav: Home, About, Contact (top right)
+- Desktop nav: About, Contact (top right). Homepage omits "Home" link; subpages include Home, About, Contact.
+- Nav links are semi-bold (font-weight 600)
 - Mobile burger menu (6 links): Home, Branding, AI Workflows, Agentic Design, About, Contact
 - Mobile overlay font: 42px, underline on hover only
+
+## Favicon
+
+All standard sizes are set up:
+- `favicon.ico` (32x32), `favicon.svg` (scalable), `favicon-16x16.png`, `favicon-32x32.png`
+- `apple-touch-icon.png` for iOS
+- `site.webmanifest` for PWA metadata
+- All HTML pages include favicon links in `<head>`
 
 ## Video Patterns
 
@@ -205,9 +220,7 @@ If you add, remove, or change any data-processing functionality on the site, upd
 
 ## Open Tasks
 
-- Imprint review for TMG Section 5 compliance
-- SEO basics: title tags, meta descriptions, Open Graph image
-- Favicon in all standard sizes
+- SEO basics: meta descriptions, Open Graph image
 - robots.txt and sitemap.xml
 - Custom 404 page verification
 
