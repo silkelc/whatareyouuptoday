@@ -66,10 +66,24 @@ Deployed on Vercel, auto-deploy on push to main.
 
 ## Design Tokens (from Figma)
 
-- `element-gap-md`: 20px
-- `element-gap-xl`: 48px
-- `card-gap`: 50px
-- `page-padding`: 50px
+### Typography (desktop / mobile)
+- `body/` — 20px / 18px (set on `body`, inherited by `.body-copy`, `.portfolio-intro`, `.say-hi-text`)
+- `heading/` — 50px / 32px
+- `caption-2/` — 16px / 14px (used by `.caption-2`, `.project-label`)
+- `link/` — 16px, weight 400, letter-spacing -0.72
+- `caption/` — 16px, weight 300, letter-spacing -0.72
+
+### Colors
+- `background` #FFFFFF, `text-primary` #000000, `text-secondary` #313131
+- `accent` #FBFF01, `accent-hover` #E8EC00, `border` #000000
+
+### Spacing
+- Page: `page-padding` (50), `page-padding-mobile` (20), `content-max-width` (1180)
+- Sections: `hero-padding-top` (200), `section-padding-top` (30), `section-padding-bottom` (80)
+- Elements: `element-gap-sm` (12), `element-gap-md` (19), `element-gap-lg` (24), `element-gap-xl` (48)
+- Components: `card-gap` (50), `button-padding-v` (6), `button-padding-h` (10), `border-radius` (4)
+
+**Rule:** Always check Figma DS variables before setting any font-size, color, or spacing value in CSS. Never hardcode arbitrary values.
 
 ## Navigation
 
@@ -181,8 +195,8 @@ The yellow dot in the nav has a CSS morph animation:
   <a href="url2" class="btn">Button 2</a>
 </div>
 ```
-- `.btn-row`: `display: flex; flex-wrap: wrap; gap: 16px;`
-- Spacing from text above: `margin-top: 12px` (+ 8px gap = 20px element-gap-md)
+- `.btn-row`: `display: flex; flex-wrap: wrap; gap: 12px;` (element-gap-sm)
+- Spacing from text above: `margin-top: 16px` (+ 8px gap = 24px element-gap-lg)
 
 ## Git Workflow
 
@@ -217,6 +231,48 @@ Located at `privacy.html`. Current section structure:
 13. Changes to This Privacy Policy
 
 If you add, remove, or change any data-processing functionality on the site, update the privacy policy in the same commit.
+
+## Frame Skill Component
+
+Grey text box used for short skill/service descriptions within portfolio sections.
+
+```html
+<div class="frame-skill">
+  <p>→ Description text here.</p>
+</div>
+```
+- Background: `#e9e9e9`, padding: 6px
+- Text: caption-2 style (16px desktop, 16px mobile), color `#313131`
+- Used on: agentic.html (3 sections), workflow.html (1 section)
+
+## Session Log — 3 June 2026
+
+### Figma DS token sync
+- Set `body` font-size to 20px desktop / 18px mobile
+- Updated `.body-copy` and `.portfolio-intro` to inherit from body (removed hardcoded 22px)
+- Updated `.caption-2` and `.project-label` to 16px desktop / 14px mobile
+- Updated `.btn-row` gap from 16px to 12px (element-gap-sm)
+- Fixed button margin inside `.btn-row` (was doubling up with gap)
+- Updated `.btn-row` margin-top to 16px (24px total with gap = element-gap-lg)
+- Updated `.say-hi` gap to 20px desktop and mobile, removed hardcoded text size
+
+### New frame-skill component
+- Created `.frame-skill` CSS component (grey box with caption-2 text)
+- Added to agentic.html: AI-Assisted System Creation, Figma to Code, Governance sections
+- Added to workflow.html: visual systems section
+
+### Copy updates
+- workflow.html: headline "Visual exploration and storytelling", new body copy for section 01, main headline shortened
+- agentic.html: frame-skill text iterations across 3 sections
+- about.html: headline updated, paragraph break added with 24px spacing
+
+### Image updates
+- Updated 5 branding carousel images (03, 05, 06, 07, 08)
+- Updated workflow-01.webp from new source
+
+### Mobile spacing
+- Added 48px spacing between about-body and about-skill on mobile
+- Frame-skill text stays 16px on mobile (not reduced to 14px like caption-2)
 
 ## Open Tasks
 
