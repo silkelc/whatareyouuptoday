@@ -9,6 +9,31 @@ Live at: https://whatareyouuptoday.com
 Stack: Static HTML, CSS, vanilla JS. No framework.
 Deployed on Vercel, auto-deploy on push to main.
 
+## Figma Design System
+
+- File: https://www.figma.com/design/Miw8cTJB8qJuchYeHNHatE/whatareyouuptoday-DS
+- The Figma Desktop Bridge plugin must be running in Figma for Claude to read/update variables.
+- Figma has two modes: **Desktop** and **Mobile**. The tablet breakpoint (1024px) is a CSS-only interpolation, not a Figma token.
+- Always check Figma DS variables before setting any font-size, color, or spacing value in CSS.
+
+## Source Files (untracked)
+
+- `.jpg` files in `images/` and `images/carousel_branding/` are source originals. Do not commit them.
+- `.mov` files in `videos/` are uncompressed sources. Do not commit them.
+- Only `.webp` images and `.mp4` videos are committed to the repo.
+
+## CSS Breakpoints
+
+Three breakpoints in `styles.css`:
+- **Desktop**: default (no media query)
+- **Tablet**: `@media (max-width: 1024px)` — intermediate sizes, CSS-only (no Figma mode)
+- **Mobile**: `@media (max-width: 768px)` — maps to Figma Mobile mode
+
+## Known Exceptions
+
+- `.frame-skill p` stays 16px on mobile (does not reduce to 14px like `caption-2`)
+- Port 3000 is used by a different project (Prompt Library). Use a different port for the preview server.
+
 ## Critical Rules (do not break these)
 
 ### Fonts
@@ -83,8 +108,6 @@ Deployed on Vercel, auto-deploy on push to main.
 - Sections: `hero-padding-top` (200), `section-padding-top` (30), `section-padding-bottom` (80)
 - Elements: `element-gap-sm` (12), `element-gap-md` (19), `element-gap-lg` (24), `element-gap-xl` (48)
 - Components: `card-gap` (50), `button-padding-v` (6), `button-padding-h` (10), `border-radius` (4)
-
-**Rule:** Always check Figma DS variables before setting any font-size, color, or spacing value in CSS. Never hardcode arbitrary values.
 
 ## Navigation
 
