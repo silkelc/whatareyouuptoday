@@ -1,6 +1,6 @@
 # whatareyouuptoday — Project Guide for Claude Code
 
-Last updated: 3 June 2026
+Last updated: 8 June 2026
 
 ## Project Overview
 
@@ -67,8 +67,9 @@ Deployed on Vercel, auto-deploy on push to main.
 ## Design Tokens (from Figma)
 
 ### Typography (desktop / mobile)
+- `h1/` — 64px / 32px (used by `.hero-text h1`, `.portfolio-header h1`, `.about-headline`)
+- `h2/` — 38px / 32px (used by `.project-title`, `.heading`, `.about-skill-title`)
 - `body/` — 20px / 18px (set on `body`, inherited by `.body-copy`, `.portfolio-intro`, `.say-hi-text`)
-- `heading/` — 50px / 32px
 - `caption-2/` — 16px / 14px (used by `.caption-2`, `.project-label`)
 - `link/` — 16px, weight 400, letter-spacing -0.72
 - `caption/` — 16px, weight 300, letter-spacing -0.72
@@ -273,6 +274,22 @@ Grey text box used for short skill/service descriptions within portfolio section
 ### Mobile spacing
 - Added 48px spacing between about-body and about-skill on mobile
 - Frame-skill text stays 16px on mobile (not reduced to 14px like caption-2)
+
+## Session Log — 8 June 2026
+
+### h1/display font-size update (Figma `h1/` token)
+- Changed all h1 elements from previous sizes to Figma `display/` (now `h1/`) token: 64px desktop, 42px tablet (1024px), 32px mobile (768px)
+- Affected selectors: `.hero-text h1`, `.portfolio-header h1`, `.about-headline`
+- Letter-spacing scaled proportionally at each breakpoint
+
+### Figma DS variable rename for SEO alignment
+- Renamed `display/` → `h1/` in Figma Typography variables (font-size, line-height, letter-spacing, font-weight)
+- Renamed `heading/` → `h2/` in Figma Typography variables (font-size, line-height, letter-spacing, font-weight)
+- Naming now maps directly to HTML semantic elements for better SEO and design-to-code clarity
+
+### Documentation
+- Updated CLAUDE.md typography tokens to reflect `h1/` and `h2/` naming
+- Updated memory file with new token names
 
 ## Open Tasks
 

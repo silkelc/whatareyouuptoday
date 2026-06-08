@@ -285,9 +285,9 @@ img {
 
 .hero-text h1 {
   font-weight: 600;
-  font-size: 50px;
+  font-size: 64px;
   line-height: 1.2;
-  letter-spacing: -2.25px;
+  letter-spacing: -2.88px;
 }
 
 .hero-text p {
@@ -632,9 +632,9 @@ img {
 
 .portfolio-header h1 {
   font-weight: 600;
-  font-size: 50px;
+  font-size: 64px;
   line-height: 1.2;
-  letter-spacing: -2.25px;
+  letter-spacing: -2.88px;
 }
 
 .portfolio-header .description {
@@ -826,9 +826,9 @@ img {
 
 .about-headline {
   font-weight: 600;
-  font-size: 52px;
+  font-size: 64px;
   line-height: 1.2;
-  letter-spacing: -2.34px;
+  letter-spacing: -2.88px;
 }
 
 .about-body {
@@ -971,8 +971,8 @@ img {
   }
 
   .hero-text h1 {
-    font-size: 36px;
-    letter-spacing: -1.62px;
+    font-size: 42px;
+    letter-spacing: -1.89px;
   }
 
   .hero-text p {
@@ -1050,8 +1050,8 @@ img {
   }
 
   .portfolio-header h1 {
-    font-size: 36px;
-    letter-spacing: -1.62px;
+    font-size: 42px;
+    letter-spacing: -1.89px;
   }
 
   .portfolio-header .description {
@@ -1075,8 +1075,8 @@ img {
   }
 
   .about-headline {
-    font-size: 38px;
-    letter-spacing: -1.71px;
+    font-size: 42px;
+    letter-spacing: -1.89px;
   }
 
   .about-skill-title {
@@ -1212,8 +1212,8 @@ img {
   }
 
   .hero-text h1 {
-    font-size: 30px;
-    letter-spacing: -1.35px;
+    font-size: 32px;
+    letter-spacing: -1.44px;
   }
 
   .hero-text p {
@@ -1273,8 +1273,8 @@ img {
   }
 
   .portfolio-header h1 {
-    font-size: 30px;
-    letter-spacing: -1.35px;
+    font-size: 32px;
+    letter-spacing: -1.44px;
   }
 
   .portfolio-header .description {
@@ -1294,8 +1294,8 @@ img {
 
   /* About */
   .about-headline {
-    font-size: 38px;
-    letter-spacing: -1.71px;
+    font-size: 32px;
+    letter-spacing: -1.44px;
   }
 
   .about-skill-title {
