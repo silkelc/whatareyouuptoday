@@ -672,6 +672,13 @@ img {
   letter-spacing: -2.88px;
 }
 
+.highlight-underline {
+  text-decoration: underline;
+  text-decoration-color: #FBFF01;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.15em;
+}
+
 .portfolio-header .description {
   font-weight: 600;
   font-size: 50px;
