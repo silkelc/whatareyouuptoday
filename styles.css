@@ -673,10 +673,11 @@ img {
 }
 
 .highlight-underline {
-  text-decoration: underline;
-  text-decoration-color: #FBFF01;
-  text-decoration-thickness: 0.12em;
-  text-underline-offset: 0.15em;
+  background-image: linear-gradient(#FBFF01, #FBFF01);
+  background-position: 0 88%;
+  background-size: 100% 0.18em;
+  background-repeat: no-repeat;
+  padding-bottom: 0.05em;
 }
 
 .portfolio-header .description {
@@ -856,7 +857,7 @@ img {
    ========================================== */
 
 .about-bio {
-  padding: 100px 0;
+  padding: 200px 0 100px;
   padding-right: 120px;
 }
 
@@ -1227,7 +1228,7 @@ img {
 
   .caption-2,
   .project-label {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .page {
