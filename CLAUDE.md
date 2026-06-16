@@ -314,10 +314,33 @@ Grey text box used for short skill/service descriptions within portfolio section
 - Updated CLAUDE.md typography tokens to reflect `h1/` and `h2/` naming
 - Updated memory file with new token names
 
+## Session Log — 16 June 2026
+
+### SEO
+- Added meta descriptions and Open Graph tags to all 7 pages
+- Created robots.txt (allow all, points to sitemap)
+- Created sitemap.xml (7 pages with priorities)
+- OG image placeholder path: `images/og-image.webp` (1200x630px, not yet created)
+
+### Yellow marker highlight
+- `.highlight-underline` class: background gradient in accent yellow (#FBFF01), marker style
+- Applied to "creative direction" on: index.html, about.html, branding.html, workflow.html
+
+### Two-image crossfade
+- `.swap-two` CSS component with separate `swap-a`/`swap-b` keyframes (8s cycle)
+- Used on workflow.html section 02: workflow-02.webp and workflow-02b.webp
+
+### Spacing and sizing fixes
+- About page top padding matched to homepage (200px)
+- `.project-label` stays 16px on mobile (not 14px)
+
+### Copy updates
+- about.html: full bio rewrite (5 paragraphs, personal intro through LABASAD)
+- branding.html: mid-text changed to "From visual exploration to a coherent brand system."
+
 ## Open Tasks
 
-- SEO basics: meta descriptions, Open Graph image
-- robots.txt and sitemap.xml
+- Open Graph image (1200x630px, save as `images/og-image.webp`)
 - Custom 404 page verification
 
 ## Tone and Copy
