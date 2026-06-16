@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found — whatareyouuptoday</title>
+  <meta name="description" content="The page you are looking for could not be found. Head back to whatareyouuptoday.com.">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Page not found — whatareyouuptoday">
+  <meta property="og:description" content="The page you are looking for could not be found. Head back to whatareyouuptoday.com.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whatareyouuptoday.com">
+  <meta property="og:image" content="https://whatareyouuptoday.com/images/og-image.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page not found — whatareyouuptoday">
+  <meta name="twitter:description" content="The page you are looking for could not be found. Head back to whatareyouuptoday.com.">
+  <meta name="twitter:image" content="https://whatareyouuptoday.com/images/og-image.webp">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">whatareyouuptoday</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="mailto:silke@lecaid.com">Contact</a>
+    </div>
+    <button class="burger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <a href="/">Home</a>
+    <a href="/branding">Branding</a>
+    <a href="/workflow">AI Workflows</a>
+    <a href="/agentic">Agentic Design</a>
+    <a href="/about">About</a>
+    <a href="mailto:silke@lecaid.com">Contact</a>
+  </div>
+
+  <main class="page">
+    <!-- 404 -->
+    <section class="content hero-text">
+      <h1><span class="highlight-underline">404</span>, this page took a different path</h1>
+      <p>The page you are looking for has moved, been renamed, or never existed. Let's get you back to something that does.</p>
+      <a href="/" class="btn">Back to home</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="content footer">
+      <div class="footer-links">
+        <a href="mailto:silke@lecaid.com">Email</a>
+        <a href="https://www.instagram.com/whatareyouuptoday/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/silke-sonnenberg" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="footer-bottom">
+        <p class="caption">&copy; Silke Sonnenberg 2026 All Rights Reserved</p>
+        <p><a href="/imprint">Imprint</a></p>
+        <p><a href="/privacy">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    });
+
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

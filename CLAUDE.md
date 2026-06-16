@@ -67,6 +67,7 @@ Three breakpoints in `styles.css`:
 ├── agentic.html        # Agentic Design Systems portfolio
 ├── privacy.html        # Privacy policy (GDPR)
 ├── imprint.html        # Legal imprint
+├── 404.html            # Custom not-found page (Vercel auto-serves on unmatched routes)
 ├── styles.css          # Single stylesheet for all pages
 ├── favicon.ico         # Favicon 32x32
 ├── favicon.svg         # SVG favicon
@@ -338,10 +339,23 @@ Grey text box used for short skill/service descriptions within portfolio section
 - about.html: full bio rewrite (5 paragraphs, personal intro through LABASAD)
 - branding.html: mid-text changed to "From visual exploration to a coherent brand system."
 
+## Session Log — 16 June 2026 (later)
+
+### Custom 404 page
+- Created `404.html` at repo root (Vercel auto-serves it for unmatched routes on static sites; no `vercel.json` change needed, returns proper 404 status)
+- Reuses `.hero-text` layout, nav (Home/About/Contact), mobile overlay + burger script, and footer
+- Yellow marker highlight (`.highlight-underline`) on "404"; copy avoids em dashes and AI buzzwords
+- `<meta name="robots" content="noindex">` added so the error page is not indexed
+- Verified in preview: renders on desktop and mobile, no console errors, unknown routes return 404 status with the page
+- Used absolute `/styles.css` (not relative) so the page stays styled when served at nested unknown paths (e.g. `/foo/bar`)
+
+### No-JS reveal fallback
+- Added `<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>` after the stylesheet link on all 5 pages that use `.reveal` (index, about, branding, workflow, agentic)
+- Reason: `.reveal` starts at `opacity:0` and is shown by the IntersectionObserver. Without JS, reveal sections (incl. the lecaid.com link + portrait on about) stayed invisible. The noscript rule overrides to visible (no animation) when JS is off; inert when JS is on.
+
 ## Open Tasks
 
 - Open Graph image (1200x630px, save as `images/og-image.webp`)
-- Custom 404 page verification
 
 ## Tone and Copy
 
