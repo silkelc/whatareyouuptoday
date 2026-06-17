@@ -65,6 +65,7 @@ Three breakpoints in `styles.css`:
 ├── branding.html       # Brand & Visual Systems portfolio
 ├── workflow.html       # Creative AI Workflows portfolio
 ├── agentic.html        # Agentic Design Systems portfolio
+├── ai-gallery.html     # AI Gallery (placeholder scaffold, served at /ai-gallery)
 ├── privacy.html        # Privacy policy (GDPR)
 ├── imprint.html        # Legal imprint
 ├── 404.html            # Custom not-found page (Vercel auto-serves on unmatched routes)
@@ -112,9 +113,9 @@ Three breakpoints in `styles.css`:
 
 ## Navigation
 
-- Desktop nav: About, Contact (top right). Homepage omits "Home" link; subpages include Home, About, Contact.
+- Desktop nav: About, AI Gallery, Contact (top right). Homepage omits "Home" link; subpages include Home, About, AI Gallery, Contact.
 - Nav links are semi-bold (font-weight 600)
-- Mobile burger menu (6 links): Home, Branding, AI Workflows, Agentic Design, About, Contact
+- Mobile burger menu (7 links): Home, Branding, AI Workflows, Agentic Design, AI Gallery, About, Contact
 - Mobile overlay font: 42px, underline on hover only
 
 ## Favicon
@@ -353,7 +354,19 @@ Grey text box used for short skill/service descriptions within portfolio section
 - Added `<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>` after the stylesheet link on all 5 pages that use `.reveal` (index, about, branding, workflow, agentic)
 - Reason: `.reveal` starts at `opacity:0` and is shown by the IntersectionObserver. Without JS, reveal sections (incl. the lecaid.com link + portrait on about) stayed invisible. The noscript rule overrides to visible (no animation) when JS is off; inert when JS is on.
 
+### AI Gallery page
+- New `ai-gallery.html` served at `/ai-gallery`: portfolio-header + masonry gallery wall + explore-more CTA + footer
+- No project teasers on this page (`.explore-projects` removed); only the "Let's shape what's next." CTA is kept in the explore-more section
+- Gallery is a CSS-columns masonry (`.gallery-grid`, 3 cols desktop / 2 tablet / 2 mobile, 20px gap, square corners). Images display at their **native aspect ratio** (`.gallery-tile img` is `width:100%; height:auto`, no `object-fit` crop), so heights vary per image. Tiles fade in via `.reveal`; hover zooms the image to 1.04.
+- Column flow is top-to-bottom down col 1, then col 2, then col 3 (height-balanced), not left-to-right rows. Source order = numbered file order.
+- Final images live in `images/ai_gallery/` (12 files, `01_…`–`12_…`), placed in numeric order. Each `<img>` carries `width`/`height` (native px) so the column layout doesn't shift on load; all `loading="lazy"`.
+- Nav link "AI Gallery" added between About and Contact in the desktop nav, and between Agentic Design and About in the mobile overlay, on all 9 pages (incl. 404)
+- Added `/ai-gallery` to sitemap.xml (priority 0.8)
+- Verified in preview: renders desktop + mobile, burger menu shows all 7 links, no console errors
+
 ## Open Tasks
+
+- AI Gallery: replace placeholder images/captions with final gallery content
 
 - Open Graph image (1200x630px, save as `images/og-image.webp`)
 
