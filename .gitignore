@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Source originals — only .webp images and .mp4 videos are committed
+*.jpg
+*.jpeg
+*.mov
+
+# Claude Code worktrees
+.claude/worktrees/
