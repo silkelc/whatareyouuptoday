@@ -133,7 +133,7 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 30px 50px 30px;
-  z-index: 100;
+  z-index: 200;
   background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -171,6 +171,11 @@ img {
   white-space: nowrap;
 }
 
+/* In the open mobile menu, show only the logo dot (wordmark is redundant there) */
+.nav:has(.burger.active) .nav-logo-text {
+  display: none;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -183,6 +188,11 @@ img {
 
 .nav-links a {
   text-decoration: underline;
+}
+
+/* Current page: not underlined (signals "you are here") */
+.nav-links a[aria-current="page"] {
+  text-decoration: none;
 }
 
 /* Mobile burger */
@@ -244,6 +254,13 @@ img {
 
 .mobile-overlay a:hover {
   text-decoration: underline;
+}
+
+/* Secondary links (Home, Contact) de-emphasized at the wordmark size */
+.mobile-overlay a[href="/"],
+.mobile-overlay a[href^="mailto:"] {
+  font-size: 24px;
+  letter-spacing: -1.08px;
 }
 
 /* ==========================================

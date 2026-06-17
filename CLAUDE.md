@@ -114,9 +114,10 @@ Three breakpoints in `styles.css`:
 ## Navigation
 
 - Desktop nav: About, AI Gallery, Contact (top right). Homepage omits "Home" link; subpages include Home, About, AI Gallery, Contact.
-- Nav links are semi-bold (font-weight 600)
+- Nav links are semi-bold (font-weight 600), underlined. The current page's link is marked `aria-current="page"` and is NOT underlined (signals "you are here") — set on About in about.html and AI Gallery in ai-gallery.html.
 - Mobile burger menu (7 links): Home, Branding, AI Workflows, Agentic Design, AI Gallery, About, Contact
-- Mobile overlay font: 42px, underline on hover only
+- Mobile overlay: primary links 42px; secondary links Home & Contact are 24px (de-emphasized, targeted via `a[href="/"]` and `a[href^="mailto:"]`); underline on hover only
+- When the overlay is open, the nav stays visible above it: yellow logo dot only on the left (the wordmark is hidden in the open menu via `.nav:has(.burger.active) .nav-logo-text { display:none }`), and the burger→X close icon on the right. This requires `.nav` z-index 200 > `.mobile-overlay` z-index 150 (the burger's own z-index is trapped in the nav's stacking context, so the nav itself must sit above the overlay). Tapping the X closes the overlay and returns to the current page.
 
 ## Favicon
 
