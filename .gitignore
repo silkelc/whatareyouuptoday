@@ -5,6 +5,8 @@
 *.jpg
 *.jpeg
 *.mov
+# Exception: Open Graph image stays JPG for broad social-platform support
+!images/open-graph-image.jpg
 
 # Claude Code worktrees
 .claude/worktrees/

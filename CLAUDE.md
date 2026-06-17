@@ -357,18 +357,21 @@ Grey text box used for short skill/service descriptions within portfolio section
 ### AI Gallery page
 - New `ai-gallery.html` served at `/ai-gallery`: portfolio-header + masonry gallery wall + explore-more CTA + footer
 - No project teasers on this page (`.explore-projects` removed); only the "Let's shape what's next." CTA is kept in the explore-more section
-- Gallery is a CSS-columns masonry (`.gallery-grid`, 3 cols desktop / 2 tablet / 2 mobile, 20px gap, square corners). Images display at their **native aspect ratio** (`.gallery-tile img` is `width:100%; height:auto`, no `object-fit` crop), so heights vary per image. Tiles fade in via `.reveal`; hover zooms the image to 1.04.
-- Column flow is top-to-bottom down col 1, then col 2, then col 3 (height-balanced), not left-to-right rows. Source order = numbered file order.
-- Final images live in `images/ai_gallery/` (12 files, `01_…`–`12_…`), placed in numeric order. Each `<img>` carries `width`/`height` (native px) so the column layout doesn't shift on load; all `loading="lazy"`.
+- Gallery is a balanced masonry (`.gallery-grid`, 3 cols desktop / 2 tablet / 2 mobile, 20px gap / 12px mobile, square corners). Images display at their **native aspect ratio** (`.gallery-tile img` is `width:100%; height:auto`, no `object-fit` crop), so heights vary per image. Tiles fade in via `.reveal` (no vertical movement — `.gallery-tile.reveal` is `transform:none` so columns stay top-aligned); hover zooms the image to 1.04.
+- Layout is built by a small inline JS masonry in `ai-gallery.html`: it adds `.is-masonry` (flex) and distributes each tile into the currently **shortest column** using the `<img>` width/height attributes (so balance is instant and unaffected by lazy loading). Column count comes from the `--cols` CSS var per breakpoint; rebuilds on resize. CSS `column-count` remains as the no-JS fallback.
+- Reason: CSS-column balancing was unreliable across viewport widths and with lazy images (one column ran much longer on iPhone/iPad). The JS shortest-column approach is deterministic and balanced on every device.
+- Final images live in `images/ai_gallery/` (12 files, `01_…`–`12_…`). Each `<img>` carries `width`/`height` (native px) so layout doesn't shift on load; all `loading="lazy"`.
 - Nav link "AI Gallery" added between About and Contact in the desktop nav, and between Agentic Design and About in the mobile overlay, on all 9 pages (incl. 404)
 - Added `/ai-gallery` to sitemap.xml (priority 0.8)
 - Verified in preview: renders desktop + mobile, burger menu shows all 7 links, no console errors
 
+### Open Graph image
+- `images/open-graph-image.jpg` (1800x945, 1.91:1 ratio, ~184KB) referenced by all `og:image` / `twitter:image` tags on all 9 pages
+- Kept as **JPG, not WebP**: OG previews render more reliably as JPG across social platforms (esp. LinkedIn). This is the one committed `.jpg` — `.gitignore` has an explicit `!images/open-graph-image.jpg` exception to the `*.jpg` rule.
+
 ## Open Tasks
 
-- AI Gallery: replace placeholder images/captions with final gallery content
-
-- Open Graph image (1200x630px, save as `images/og-image.webp`)
+- (none)
 
 ## Tone and Copy
 
