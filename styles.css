@@ -1011,6 +1011,12 @@ img {
   transform: scale(1.04);
 }
 
+/* Fade tiles in without vertical movement, so masonry columns stay
+   top-aligned even while images reveal at different heights. */
+.gallery-tile.reveal {
+  transform: none;
+}
+
 @media (max-width: 1024px) {
   .gallery-grid { column-count: 2; }
 }
@@ -1018,8 +1024,10 @@ img {
 @media (max-width: 768px) {
   .gallery-grid {
     column-count: 2;
+    column-gap: 12px;
     margin-top: 30px;
   }
+  .gallery-tile { margin-bottom: 12px; }
 }
 
 /* ==========================================
