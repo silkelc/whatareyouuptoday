@@ -988,9 +988,27 @@ img {
    ========================================== */
 
 .gallery-grid {
+  --cols: 3;
+  margin-top: 48px;
+  /* No-JS fallback: CSS multi-column masonry */
   column-count: 3;
   column-gap: 20px;
-  margin-top: 48px;
+}
+
+/* JS-built balanced masonry: tiles distributed into shortest column */
+.gallery-grid.is-masonry {
+  column-count: initial;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.gallery-col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .gallery-tile {
@@ -998,6 +1016,10 @@ img {
   margin-bottom: 20px;
   overflow: hidden;
   background: #e9e9e9;
+}
+
+.gallery-grid.is-masonry .gallery-tile {
+  margin-bottom: 0;
 }
 
 .gallery-tile img {
@@ -1018,16 +1040,28 @@ img {
 }
 
 @media (max-width: 1024px) {
-  .gallery-grid { column-count: 2; }
+  .gallery-grid {
+    --cols: 2;
+    column-count: 2;
+  }
 }
 
 @media (max-width: 768px) {
   .gallery-grid {
+    --cols: 2;
     column-count: 2;
     column-gap: 12px;
     margin-top: 30px;
   }
-  .gallery-tile { margin-bottom: 12px; }
+  .gallery-grid.is-masonry {
+    gap: 12px;
+  }
+  .gallery-col {
+    gap: 12px;
+  }
+  .gallery-tile {
+    margin-bottom: 12px;
+  }
 }
 
 /* ==========================================

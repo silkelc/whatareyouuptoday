@@ -122,6 +122,49 @@
       });
     });
 
+    // Balanced masonry: place each tile in the currently shortest column.
+    // Heights come from the img width/height attributes, so balance is
+    // computed instantly and is not affected by lazy image loading.
+    (function () {
+      const grid = document.querySelector('.gallery-grid');
+      if (!grid) return;
+      const tiles = Array.from(grid.children).filter(el => el.classList.contains('gallery-tile'));
+      if (!tiles.length) return;
+      let currentCols = 0;
+      function build() {
+        const cols = parseInt(getComputedStyle(grid).getPropertyValue('--cols'), 10) || 1;
+        if (cols === currentCols) return;
+        currentCols = cols;
+        grid.classList.add('is-masonry');
+        grid.textContent = '';
+        const gap = parseFloat(getComputedStyle(grid).rowGap) || 0;
+        const colWidth = (grid.clientWidth - gap * (cols - 1)) / cols;
+        const colEls = [], heights = [];
+        for (let i = 0; i < cols; i++) {
+          const c = document.createElement('div');
+          c.className = 'gallery-col';
+          grid.appendChild(c);
+          colEls.push(c);
+          heights.push(0);
+        }
+        tiles.forEach(tile => {
+          const img = tile.querySelector('img');
+          const w = parseFloat(img.getAttribute('width')) || 1;
+          const h = parseFloat(img.getAttribute('height')) || 1;
+          let min = 0;
+          for (let i = 1; i < cols; i++) if (heights[i] < heights[min]) min = i;
+          colEls[min].appendChild(tile);
+          heights[min] += colWidth * (h / w) + gap;
+        });
+      }
+      build();
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(build, 150);
+      });
+    })();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
