@@ -361,7 +361,10 @@ Grey text box used for short skill/service descriptions within portfolio section
 - Gallery is a balanced masonry (`.gallery-grid`, 3 cols desktop / 2 tablet / 2 mobile, 20px gap / 12px mobile, square corners). Images display at their **native aspect ratio** (`.gallery-tile img` is `width:100%; height:auto`, no `object-fit` crop), so heights vary per image. Tiles fade in via `.reveal` (no vertical movement — `.gallery-tile.reveal` is `transform:none` so columns stay top-aligned); hover zooms the image to 1.04.
 - Layout is built by a small inline JS masonry in `ai-gallery.html`: it adds `.is-masonry` (flex) and distributes each tile into the currently **shortest column** using the `<img>` width/height attributes (so balance is instant and unaffected by lazy loading). Column count comes from the `--cols` CSS var per breakpoint; rebuilds on resize. CSS `column-count` remains as the no-JS fallback.
 - Reason: CSS-column balancing was unreliable across viewport widths and with lazy images (one column ran much longer on iPhone/iPad). The JS shortest-column approach is deterministic and balanced on every device.
-- Final images live in `images/ai_gallery/` (12 files, `01_…`–`12_…`). Each `<img>` carries `width`/`height` (native px) so layout doesn't shift on load; all `loading="lazy"`.
+- Final images live in `images/ai_gallery/` (21 files, `01_…`–`21_…`). Each `<img>` carries `width`/`height` (native px) so layout doesn't shift on load; all `loading="lazy"`.
+- **Video tiles:** a tile can be a `<video loop muted playsinline preload="none">` with `poster=` set to the matching still (the still is the fallback / no-JS view) and `width`/`height` = the still's native px (same aspect ratio, so the masonry balances unchanged). The masonry JS and `.gallery-tile` CSS target `img, video`. Video + still are paired by name in `images/ai_gallery/` (e.g. `05_Gallery_Flowers.webp` + `.mp4`). Current video tiles: 05, 12, 21.
+- **Play-on-visible:** videos are NOT `autoplay`. An IntersectionObserver in `ai-gallery.html` (`rootMargin: '200px'`) calls `play()` when a video nears the viewport and `pause()` when it leaves, and `preload="none"` means off-screen clips never load. Keeps the page light when several videos exist. Without JS, the poster (still) shows.
+- Gallery video compression: source `.mp4`/`.mov` is over-spec (~12MB, ~20Mbps); re-encode H.264 with `avconvert -p Preset960x540 --multiPass` (≈540 tall portrait, ~2.6MB for a 5s loop). Use `Preset1280x720` for crisper/larger, or `--duration 5` to trim a long clip to a 5s loop (~half the size). Only the compressed `.mp4` is committed; source `.mov` is gitignored.
 - Nav link "AI Gallery" added between About and Contact in the desktop nav, and between Agentic Design and About in the mobile overlay, on all 9 pages (incl. 404)
 - Added `/ai-gallery` to sitemap.xml (priority 0.8)
 - Verified in preview: renders desktop + mobile, burger menu shows all 7 links, no console errors
@@ -370,9 +373,27 @@ Grey text box used for short skill/service descriptions within portfolio section
 - `images/open-graph-image.jpg` (1800x945, 1.91:1 ratio, ~184KB) referenced by all `og:image` / `twitter:image` tags on all 9 pages
 - Kept as **JPG, not WebP**: OG previews render more reliably as JPG across social platforms (esp. LinkedIn). This is the one committed `.jpg` — `.gitignore` has an explicit `!images/open-graph-image.jpg` exception to the `*.jpg` rule.
 
+## Session Log — 17 June 2026
+
+### Shipped today
+- Custom 404 page; no-JS `.reveal` fallback on all reveal pages
+- **AI Gallery** (`/ai-gallery`): full build — balanced JS shortest-column masonry, native aspect ratios, square corners, 20px/12px gaps; nav link on all 9 pages; sitemap entry (details in the AI Gallery notes above)
+- AI Gallery content: 21 images (`01_…`–`21_…`), headline "A gallery of ideas and the few that made the cut"
+- **Video tiles** (03, 05, 12, 21): still as `poster`, `preload="none"`, play-on-visible via IntersectionObserver; H.264 compression workflow with `avconvert`
+- Open Graph image (`open-graph-image.jpg`, JPG) on all pages
+- Rewrote all meta titles + descriptions to match each page's real copy (dropped AI buzzwords); fixed workflow/branding `<title>` mismatches
+- Nav polish: active-page link not underlined (`aria-current`); mobile overlay keeps logo dot + burger→X close icon visible, Home/Contact de-emphasized to 24px
+- Homepage: "AI Gallery" button on the Brand card; tag edits (+Weavy −iteration; +Claude)
+- Added `.gitignore` (`.DS_Store`, `.jpg`/`.mov` sources, worktrees; exception for the OG jpg)
+
+### Important to keep in mind
+- **AI Gallery is the active work area.** New videos arrive paired by name in `images/ai_gallery/` (`NN_Name.webp` + `NN_Name.mp4`/`.mov`). Per video: compress if over-spec (`avconvert -p Preset960x540 --multiPass`, add `--duration 5` for long clips), replace the heavy original, convert that tile from `<img>` to the `<video>` poster pattern. Some delivered clips are already small (e.g. 03 was 0.9MB) and need no compression. Masonry + play-on-visible then handle it automatically.
+- Only compressed `.mp4` + `.webp` get committed; `.mov`/`.jpg`/`.DS_Store` are gitignored.
+- Masonry balance + top-alignment depend on the inline JS in `ai-gallery.html` (CSS columns is only the no-JS fallback). Each tile needs correct `width`/`height` on its `img`/`video`.
+
 ## Open Tasks
 
-- (none)
+- AI Gallery: more videos coming (to wire up tomorrow, same per-video workflow as above)
 
 ## Tone and Copy
 

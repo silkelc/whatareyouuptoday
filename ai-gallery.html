@@ -68,16 +68,25 @@
       <div class="gallery-grid">
         <div class="gallery-tile reveal"><img src="images/ai_gallery/01_Gallery_Portrait_black.webp" alt="Portrait in black" width="816" height="1456" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/02_Gallery_Cream.webp" alt="Cream-toned composition" width="1000" height="1000" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/03_Gallery_PerfumeBottle.webp" alt="Perfume bottle" width="1000" height="1250" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/03_Gallery_PerfumeBottle.webp" width="1000" height="1250" aria-label="Perfume bottle, animated"><source src="images/ai_gallery/03_Gallery_PerfumeBottle.mp4" type="video/mp4"></video></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/04_China_blur.webp" alt="Blurred porcelain still life" width="1000" height="753" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/05_Gallery_Flowers.webp" alt="Floral arrangement" width="1000" height="1328" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/05_Gallery_Flowers.webp" width="1080" height="1920" aria-label="Floral arrangement, animated"><source src="images/ai_gallery/05_Gallery_Flowers.mp4" type="video/mp4"></video></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/06_Gallery_StageAlice.webp" alt="Stage scene" width="1600" height="679" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/07_Gallery_FashionDress.webp" alt="Fashion dress" width="1000" height="1000" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/08_Gallery_IlluDress.webp" alt="Illustrated dress" width="896" height="1344" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/09_Gallery_Running.webp" alt="Figure in motion" width="1000" height="1000" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/10_Gallery_Handbag.webp" alt="Handbag" width="1000" height="1538" loading="lazy" decoding="async"></div>
         <div class="gallery-tile reveal"><img src="images/ai_gallery/11_Gallery_ChineseMan.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/12_Gallery_StillLife.webp" alt="Still life" width="1000" height="1328" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/12_Gallery_StillLife.webp" width="1000" height="1328" aria-label="Still life, animated"><source src="images/ai_gallery/12_Gallery_StillLife.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/13_Gallery_Alice.webp" alt="Portrait" width="1000" height="1050" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/14_Gallery_Bubble.webp" alt="Bubble" width="1000" height="1778" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/15_Gallery_StillGarden.webp" alt="Still garden" width="1000" height="429" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/16_Gallery_Street_Models.webp" alt="Street models" width="1000" height="1792" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/17_Gallery_AbstractWoman.webp" alt="Abstract portrait of a woman" width="960" height="1200" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/18_Gallery_BlackWhite.webp" alt="Black and white study" width="960" height="682" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/19_Gallery_AbstractBlossoms.webp" alt="Abstract blossoms" width="1000" height="1784" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><img src="images/ai_gallery/20_Gallery_Man.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/21_Gallery_HeadCloud.webp" width="1000" height="1784" aria-label="Head in cloud, animated"><source src="images/ai_gallery/21_Gallery_HeadCloud.mp4" type="video/mp4"></video></div>
       </div>
     </section>
 
@@ -148,9 +157,9 @@
           heights.push(0);
         }
         tiles.forEach(tile => {
-          const img = tile.querySelector('img');
-          const w = parseFloat(img.getAttribute('width')) || 1;
-          const h = parseFloat(img.getAttribute('height')) || 1;
+          const media = tile.querySelector('img, video');
+          const w = parseFloat(media.getAttribute('width')) || 1;
+          const h = parseFloat(media.getAttribute('height')) || 1;
           let min = 0;
           for (let i = 1; i < cols; i++) if (heights[i] < heights[min]) min = i;
           colEls[min].appendChild(tile);
@@ -175,6 +184,23 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Play gallery videos only while they are in (or near) the viewport, so
+    // off-screen clips don't all load and play at once.
+    const galleryVideos = document.querySelectorAll('.gallery-tile video');
+    if (galleryVideos.length && 'IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const v = entry.target;
+          if (entry.isIntersecting) {
+            if (v.paused) v.play().catch(() => {});
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      }, { rootMargin: '200px 0px' });
+      galleryVideos.forEach(v => videoObserver.observe(v));
+    }
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>

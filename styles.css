@@ -1039,14 +1039,16 @@ img {
   margin-bottom: 0;
 }
 
-.gallery-tile img {
+.gallery-tile img,
+.gallery-tile video {
   display: block;
   width: 100%;
   height: auto;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gallery-tile:hover img {
+.gallery-tile:hover img,
+.gallery-tile:hover video {
   transform: scale(1.04);
 }
 
