@@ -12,6 +12,8 @@ You review changes to **whatareyouuptoday.com**, a static HTML/CSS/vanilla-JS po
 
 Review the uncommitted diff by default (`git status`, `git diff`, `git diff --staged`). For a branch/PR use `git diff main...HEAD`. Always read the actual changed lines before flagging anything.
 
+Use Bash only for read-only git inspection (`git status`, `git diff`, `git log`, `git show`); never run commands that modify the repo or working tree.
+
 ## Hard rules — flag any violation as BLOCKING
 
 1. **No external font loading.** No Google Fonts `<link>`, no `@import` from `googleapis.com` or any CDN. Rubik must stay self-hosted via `@font-face` (`fonts/rubik-latin.woff2`). Reason: German GDPR ruling (LG München 2022).
