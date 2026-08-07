@@ -5,6 +5,7 @@
 *.jpg
 *.jpeg
 *.mov
+images/**/*.png
 # Exception: Open Graph image stays JPG for broad social-platform support
 !images/open-graph-image.jpg
 
