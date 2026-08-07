@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="styles.css">
-  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+  <noscript><style>.reveal{opacity:1;transform:none}.gallery-filter{display:none}</style></noscript>
 </head>
 <body>
   <!-- Navigation -->
@@ -65,33 +65,43 @@
     <!-- GALLERY: images display at their native aspect ratio (no crop).
          width/height attributes reserve layout space to prevent shift on load. -->
     <section class="content">
+      <div class="gallery-filter" role="group" aria-label="Filter gallery">
+        <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-btn" data-filter="portrait" aria-pressed="false">Portrait</button>
+        <button type="button" class="filter-btn" data-filter="fashion" aria-pressed="false">Fashion</button>
+        <button type="button" class="filter-btn" data-filter="still-life" aria-pressed="false">Still Life</button>
+        <button type="button" class="filter-btn" data-filter="character" aria-pressed="false">Character</button>
+        <button type="button" class="filter-btn" data-filter="abstract" aria-pressed="false">Abstract</button>
+        <button type="button" class="filter-btn" data-filter="scenes" aria-pressed="false">Scenes</button>
+        <button type="button" class="filter-btn" data-filter="video" aria-pressed="false">Video</button>
+      </div>
       <div class="gallery-grid">
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/01_Gallery_Portrait_black.webp" alt="Portrait in black" width="816" height="1456" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/02_Gallery_Cream.webp" alt="Cream-toned composition" width="1000" height="1000" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/03_Gallery_PerfumeBottle.webp" width="1000" height="1250" aria-label="Perfume bottle, animated"><source src="images/ai_gallery/03_Gallery_PerfumeBottle.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/04_China_blur.webp" alt="Blurred porcelain still life" width="1000" height="753" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/04B_Dog_Tennis.webp" width="1000" height="1792" aria-label="Dog with tennis ball, animated"><source src="images/ai_gallery/04B_Dog_Tennis.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/05_Gallery_Flowers.webp" width="1080" height="1920" aria-label="Floral arrangement, animated"><source src="images/ai_gallery/05_Gallery_Flowers.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/06_Gallery_StageAlice.webp" alt="Stage scene" width="1600" height="679" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/07_Gallery_FashionDress.webp" alt="Fashion dress" width="1000" height="1000" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/08_Gallery_IlluDress.webp" alt="Illustrated dress" width="896" height="1344" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/09_Gallery_Running.webp" alt="Figure in motion" width="1000" height="1000" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/10_Gallery_Handbag.webp" alt="Handbag" width="1000" height="1538" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/11_Gallery_ChineseMan.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/12_Gallery_StillLife.webp" width="1000" height="1328" aria-label="Still life, animated"><source src="images/ai_gallery/12_Gallery_StillLife.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/13_Gallery_Alice.webp" alt="Portrait" width="1000" height="1050" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/14_Gallery_Bubble.webp" alt="Bubble" width="1000" height="1778" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/15_Gallery_StillGarden.webp" alt="Still garden" width="1000" height="429" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/16_Gallery_Street_Models.webp" alt="Street models" width="1000" height="1792" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/17_Gallery_AbstractWoman.webp" alt="Abstract portrait of a woman" width="960" height="1200" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/18_Gallery_BlackWhite.webp" alt="Black and white study" width="960" height="682" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/19_Gallery_AbstractBlossoms.webp" alt="Abstract blossoms" width="1000" height="1784" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/19B_Gallery_OperaCLP.webp" alt="Opera scene" width="1000" height="1491" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/20_Gallery_Man.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/21_Gallery_HeadCloud.webp" width="1000" height="1784" aria-label="Head in cloud, animated"><source src="images/ai_gallery/21_Gallery_HeadCloud.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/22_Gallery_Cat.webp" width="1000" height="1784" aria-label="Cat, animated"><source src="images/ai_gallery/22_Gallery_Cat.mp4" type="video/mp4"></video></div>
-        <div class="gallery-tile reveal"><img src="images/ai_gallery/23_Gallery_Summer.webp" alt="Summer scene, figures jumping from a jetty into the sea" width="1000" height="1253" loading="lazy" decoding="async"></div>
-        <div class="gallery-tile reveal"><video loop muted playsinline preload="none" poster="images/ai_gallery/24_Gallery_Fotoshoot.webp" width="720" height="1280" aria-label="Fashion photoshoot, animated"><source src="images/ai_gallery/24_Gallery_Fotoshoot.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="portrait"><img src="images/ai_gallery/01_Gallery_Portrait_black.webp" alt="Portrait in black" width="816" height="1456" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="still-life"><img src="images/ai_gallery/02_Gallery_Cream.webp" alt="Cream-toned composition" width="1000" height="1000" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="still-life video"><video loop muted playsinline preload="none" poster="images/ai_gallery/03_Gallery_PerfumeBottle.webp" width="1000" height="1250" aria-label="Perfume bottle, animated"><source src="images/ai_gallery/03_Gallery_PerfumeBottle.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="abstract"><img src="images/ai_gallery/04_China_blur.webp" alt="Blurred porcelain still life" width="1000" height="753" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="character video"><video loop muted playsinline preload="none" poster="images/ai_gallery/04B_Dog_Tennis.webp" width="1000" height="1792" aria-label="Dog with tennis ball, animated"><source src="images/ai_gallery/04B_Dog_Tennis.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="still-life video"><video loop muted playsinline preload="none" poster="images/ai_gallery/05_Gallery_Flowers.webp" width="1080" height="1920" aria-label="Floral arrangement, animated"><source src="images/ai_gallery/05_Gallery_Flowers.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="scenes"><img src="images/ai_gallery/06_Gallery_StageAlice.webp" alt="Stage scene" width="1600" height="679" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion"><img src="images/ai_gallery/07_Gallery_FashionDress.webp" alt="Fashion dress" width="1000" height="1000" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion"><img src="images/ai_gallery/08_Gallery_IlluDress.webp" alt="Illustrated dress" width="896" height="1344" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="scenes"><img src="images/ai_gallery/09_Gallery_Running.webp" alt="Figure in motion" width="1000" height="1000" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion"><img src="images/ai_gallery/10_Gallery_Handbag.webp" alt="Handbag" width="1000" height="1538" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="portrait"><img src="images/ai_gallery/11_Gallery_ChineseMan.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="still-life video"><video loop muted playsinline preload="none" poster="images/ai_gallery/12_Gallery_StillLife.webp" width="1000" height="1328" aria-label="Still life, animated"><source src="images/ai_gallery/12_Gallery_StillLife.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="portrait"><img src="images/ai_gallery/13_Gallery_Alice.webp" alt="Portrait" width="1000" height="1050" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="abstract"><img src="images/ai_gallery/14_Gallery_Bubble.webp" alt="Bubble" width="1000" height="1778" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="abstract"><img src="images/ai_gallery/15_Gallery_StillGarden.webp" alt="Still garden" width="1000" height="429" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion"><img src="images/ai_gallery/16_Gallery_Street_Models.webp" alt="Street models" width="1000" height="1792" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="abstract"><img src="images/ai_gallery/17_Gallery_AbstractWoman.webp" alt="Abstract portrait of a woman" width="960" height="1200" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="scenes"><img src="images/ai_gallery/18_Gallery_BlackWhite.webp" alt="Black and white study" width="960" height="682" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="abstract"><img src="images/ai_gallery/19_Gallery_AbstractBlossoms.webp" alt="Abstract blossoms" width="1000" height="1784" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion"><img src="images/ai_gallery/19B_Gallery_OperaCLP.webp" alt="Opera scene" width="1000" height="1491" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="portrait"><img src="images/ai_gallery/20_Gallery_Man.webp" alt="Portrait of a man" width="1000" height="560" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="portrait video"><video loop muted playsinline preload="none" poster="images/ai_gallery/21_Gallery_HeadCloud.webp" width="1000" height="1784" aria-label="Head in cloud, animated"><source src="images/ai_gallery/21_Gallery_HeadCloud.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="character video"><video loop muted playsinline preload="none" poster="images/ai_gallery/22_Gallery_Cat.webp" width="1000" height="1784" aria-label="Cat, animated"><source src="images/ai_gallery/22_Gallery_Cat.mp4" type="video/mp4"></video></div>
+        <div class="gallery-tile reveal" data-tags="scenes"><img src="images/ai_gallery/23_Gallery_Summer.webp" alt="Summer scene, figures jumping from a jetty into the sea" width="1000" height="1253" loading="lazy" decoding="async"></div>
+        <div class="gallery-tile reveal" data-tags="fashion video"><video loop muted playsinline preload="none" poster="images/ai_gallery/24_Gallery_Fotoshoot.webp" width="720" height="1280" aria-label="Fashion photoshoot, animated"><source src="images/ai_gallery/24_Gallery_Fotoshoot.mp4" type="video/mp4"></video></div>
       </div>
     </section>
 
@@ -145,9 +155,14 @@
       const tiles = Array.from(grid.children).filter(el => el.classList.contains('gallery-tile'));
       if (!tiles.length) return;
       let currentCols = 0;
-      function build() {
+      let activeFilter = 'all';
+      function shownTiles() {
+        if (activeFilter === 'all') return tiles;
+        return tiles.filter(t => (t.dataset.tags || '').split(' ').indexOf(activeFilter) !== -1);
+      }
+      function build(force) {
         const cols = parseInt(getComputedStyle(grid).getPropertyValue('--cols'), 10) || 1;
-        if (cols === currentCols) return;
+        if (cols === currentCols && !force) return;
         currentCols = cols;
         grid.classList.add('is-masonry');
         grid.textContent = '';
@@ -161,7 +176,7 @@
           colEls.push(c);
           heights.push(0);
         }
-        tiles.forEach(tile => {
+        shownTiles().forEach(tile => {
           const media = tile.querySelector('img, video');
           const w = parseFloat(media.getAttribute('width')) || 1;
           const h = parseFloat(media.getAttribute('height')) || 1;
@@ -176,6 +191,22 @@
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(build, 150);
+      });
+
+      // Filter tags: rebuild the masonry with only the matching tiles.
+      const filterBtns = document.querySelectorAll('.gallery-filter .filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.filter === activeFilter) return;
+          activeFilter = btn.dataset.filter;
+          filterBtns.forEach(b => {
+            b.classList.toggle('is-active', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          // Skip the reveal animation for tiles re-entering after a filter change.
+          tiles.forEach(t => t.classList.add('visible'));
+          build(true);
+        });
       });
     })();
 

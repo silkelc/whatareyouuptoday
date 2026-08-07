@@ -1004,6 +1004,45 @@ img {
    AI Gallery — Masonry Wall
    ========================================== */
 
+/* Filter tags above the gallery (left aligned) */
+.gallery-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* element-gap-sm */
+  margin-top: 48px; /* element-gap-xl, same rhythm as the grid had */
+}
+
+.filter-btn {
+  appearance: none;
+  cursor: pointer;
+  padding: 6px 10px; /* button-padding-v/h */
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  font-size: 16px; /* link token */
+  line-height: 1.03;
+  letter-spacing: -0.72px;
+  color: #000;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #e8ec00; /* accent-hover */
+  border-color: #e8ec00;
+  transform: translateY(-1px);
+}
+
+.filter-btn.is-active {
+  background: #fbff01; /* accent */
+  border-color: #fbff01;
+}
+
+.gallery-filter + .gallery-grid {
+  margin-top: 24px; /* element-gap-lg */
+}
+
 .gallery-grid {
   --cols: 3;
   margin-top: 48px;
@@ -1066,6 +1105,9 @@ img {
 }
 
 @media (max-width: 768px) {
+  .gallery-filter {
+    margin-top: 30px;
+  }
   .gallery-grid {
     --cols: 2;
     column-count: 2;

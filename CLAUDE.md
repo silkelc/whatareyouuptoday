@@ -399,6 +399,14 @@ Grey text box used for short skill/service descriptions within portfolio section
 - `.gitignore`: added `images/**/*.png` under source originals (PNG sources were not covered; root favicon PNGs are unaffected since the pattern is scoped to `images/`).
 - Verified in preview: both tiles load, video plays via play-on-visible, masonry balanced at 2 and 3 columns.
 
+### AI Gallery: filter tags
+- Filter bar (`.gallery-filter`) between the intro and the grid, left aligned: All, Portrait, Fashion, Still Life, Character, Abstract, Scenes, Video
+- Each `.gallery-tile` carries `data-tags` (space-separated, e.g. `"still-life video"`); a tile can match several filters. Video tiles all have the `video` tag in addition to a content tag.
+- Chips are `.filter-btn`: white with 1px black border, active chip accent yellow (#FBFF01), hover accent-hover (#E8EC00); typography and padding match `.btn` (16px Rubik 400, -0.72 ls, 6/10 padding, radius 4)
+- Filtering rebuilds the JS masonry with only matching tiles (`build(force)` + `shownTiles()`); tiles get `.visible` on filter change so re-entering tiles skip the reveal animation. Play-on-visible keeps working because the video IntersectionObserver stays subscribed across detach/reattach.
+- No-JS: `.gallery-filter` is hidden via the noscript style block (CSS-columns fallback shows all tiles unfiltered)
+- New tiles need a `data-tags` attribute or they only appear under "All"
+
 ## Open Tasks
 
 - AI Gallery: more videos may still arrive (same per-video workflow as above)
