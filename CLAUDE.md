@@ -391,9 +391,17 @@ Grey text box used for short skill/service descriptions within portfolio section
 - Only compressed `.mp4` + `.webp` get committed; `.mov`/`.jpg`/`.DS_Store` are gitignored.
 - Masonry balance + top-alignment depend on the inline JS in `ai-gallery.html` (CSS columns is only the no-JS fallback). Each tile needs correct `width`/`height` on its `img`/`video`.
 
+## Session Log — 7 August 2026
+
+### AI Gallery: tiles 23 and 24
+- `23_Gallery_Summer`: delivered as 7MB PNG (1968x2464), converted with `cwebp -q 90 -resize 1000 0` → 239KB WebP (1000x1253). Image tile.
+- `24_Gallery_Fotoshoot`: delivered as MP4 only (720x1280, 5s, 2.1Mbps — already in spec, no re-encode). No still was delivered, so the poster was extracted from the first video frame via a Swift `AVAssetImageGenerator` one-liner (no ffmpeg on this machine), then `cwebp -q 90` → 69KB poster. Video tile, `width="720" height="1280"`.
+- `.gitignore`: added `images/**/*.png` under source originals (PNG sources were not covered; root favicon PNGs are unaffected since the pattern is scoped to `images/`).
+- Verified in preview: both tiles load, video plays via play-on-visible, masonry balanced at 2 and 3 columns.
+
 ## Open Tasks
 
-- AI Gallery: more videos coming (to wire up tomorrow, same per-video workflow as above)
+- AI Gallery: more videos may still arrive (same per-video workflow as above)
 
 ## Tone and Copy
 
