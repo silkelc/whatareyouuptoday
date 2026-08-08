@@ -98,20 +98,40 @@ Three breakpoints in `styles.css`:
 > Design system, and this file all follow it. Never change the site to match a token file; change the
 > token file. The scale below was read off the live stylesheet, not transcribed from Figma.
 
+### Token names — one set, used by every surface
+
+Nine type tokens, named by **role**, not by HTML level. Identical names in Figma (Typography
+collection), the Storybook in `design-token-pipeline`, the Claude Design system
+(`tokens/typography.css`), and this file:
+
+`h1` · `title` · `h2` · `wordmark` · `lead` · `body` · `link` · `caption` · `caption-2`
+
+Role-based naming matters because level and appearance are separate decisions: `.project-title` uses
+the `title` token as an `h2` on the homepage and as an `h3` on the case-study pages. A token named
+after an element would imply a level it does not own. Pick the heading level from the document
+outline, pick the token for appearance.
+
+Figma also carries `label` (12px, weight 500). That belongs to the **social and report surfaces** in
+the Figma file, not the website. Nothing on the site uses 12px.
+
+Two live sizes still have no token anywhere: **52** (`.imprint-title`, `.about-now-heading`) and
+**42** (`.mobile-overlay a`). Both are one-offs. Note 52 and 50 sit 2px apart and could arguably
+collapse into `title`, but that would change rendered sizes, so it stays as-is.
+
 ### Typography — full live scale (desktop / tablet 1024 / mobile 768)
 
-| px | Used by | Notes |
-|---|---|---|
-| 64 / 42 / 32 | `.hero-text h1`, `.portfolio-header h1`, `.about-headline` | `h1/`, weight 600, lh 1.2 |
-| 52 | `.imprint-title`, `.about-now-heading` | **no token yet** |
-| 50 / 36 / 30 | `.project-title`, `.say-hi h2`, `.explore-more-heading`, `.footer-links a`, `.portfolio-header .description`, `.mid-text p` | title size, **no Figma token** |
-| 42 | `.mobile-overlay a` (primary links) | secondary overlay links are 24 |
-| 38 | `.heading`, `.about-skill-title` | `h2/`, weight 600 |
-| 24 | `.nav-logo-text`, `.footer-bottom`, overlay Home/Contact | wordmark |
-| 22 / 18 | `.hero-text p`, `.about-body`, `.about-now-body`, `.explore-more-sub`, `.imprint-block h2` | lead paragraph, **no token yet** |
-| 20 / 18 | `body` | `body/`, weight **400** |
-| 18 | `.imprint-block p`, `.imprint-block ul`, `.portfolio-header .subtitle` | |
-| 16 | `.caption-2`, `.caption`, `.caption-3`, `.link-text`, `.nav-links`, `.btn`, `.filter-btn`, `.tag`, `.project-label`, `.frame-skill p`, `.gallery-caption`, `.about-now-label` | `link/` `caption/` `caption-2/` |
+| px | Token | Used by | Notes |
+|---|---|---|---|
+| 64 / 42 / 32 | `h1` | `.hero-text h1`, `.portfolio-header h1`, `.about-headline` | weight 600, lh 1.2 |
+| 52 | *(none)* | `.imprint-title`, `.about-now-heading` | one-off |
+| 50 / 36 / 30 | `title` | `.project-title`, `.say-hi h2`, `.explore-more-heading`, `.footer-links a`, `.mid-text p` | weight 600, lh 1.2 |
+| 42 | *(none)* | `.mobile-overlay a` (primary links) | one-off; secondary overlay links are 24 |
+| 38 | `h2` | `.heading`, `.about-skill-title` | weight 600, lh 1.2 |
+| 24 | `wordmark` | `.nav-logo-text`, `.footer-bottom`, overlay Home/Contact | weight 600, lh 1.52 |
+| 22 / 18 | `lead` | `.hero-text p`, `.about-body`, `.about-now-body`, `.explore-more-sub`, `.imprint-block h2` | weight 400, lh 1.15 |
+| 20 / 18 | `body` | `body` | weight **400**, lh 1.15 |
+| 18 | *(none)* | `.imprint-block p`, `.imprint-block ul`, `.portfolio-header .subtitle` | matches body-mobile |
+| 16 | `link` `caption` `caption-2` | `.caption-2`, `.caption`, `.caption-3`, `.link-text`, `.nav-links`, `.btn`, `.filter-btn`, `.tag`, `.project-label`, `.frame-skill p`, `.gallery-caption`, `.about-now-label` | `caption` is w300, the others w400 |
 
 **Letter-spacing is always -4.5% of font size** (`-0.045em`), at every size and breakpoint, with no
 exceptions. -2.88px at 64, -2.25px at 50, -1.71px at 38, -0.9px at 20, -0.72px at 16.
