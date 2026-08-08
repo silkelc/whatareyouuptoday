@@ -267,22 +267,28 @@ img {
    Button
    ========================================== */
 
-.btn {
+/* Shared button typography and box. Colors are set per variant below
+   (.btn = accent fill, .filter-btn = outlined chip in the AI Gallery). */
+.btn,
+.filter-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 10px;
-  background: #fbff01;
-  border: 1px solid #fbff01;
+  padding: 6px 10px; /* button-padding-v / button-padding-h */
   font-family: 'Rubik', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 16px; /* link/ */
   line-height: 1.03;
   letter-spacing: -0.72px;
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn {
+  background: #fbff01;
+  border: 1px solid #fbff01;
 }
 
 .btn:hover {
@@ -1012,20 +1018,12 @@ img {
   margin-top: 48px; /* element-gap-xl, same rhythm as the grid had */
 }
 
+/* Typography, padding and transition come from the shared .btn rule.
+   Square corners, matching the buttons and gallery tiles across the site. */
 .filter-btn {
   appearance: none;
-  cursor: pointer;
-  padding: 6px 10px; /* button-padding-v/h */
   background: #fff;
   border: 1px solid #000;
-  border-radius: 4px;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 400;
-  font-size: 16px; /* link token */
-  line-height: 1.03;
-  letter-spacing: -0.72px;
-  color: #000;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .filter-btn:hover {
@@ -1039,13 +1037,9 @@ img {
   border-color: #fbff01;
 }
 
-.gallery-filter + .gallery-grid {
-  margin-top: 24px; /* element-gap-lg */
-}
-
 .gallery-grid {
   --cols: 3;
-  margin-top: 48px;
+  margin-top: 24px; /* element-gap-lg, spacing from the filter bar above */
   /* No-JS fallback: CSS multi-column masonry */
   column-count: 3;
   column-gap: 20px;
@@ -1112,7 +1106,6 @@ img {
     --cols: 2;
     column-count: 2;
     column-gap: 12px;
-    margin-top: 30px;
   }
   .gallery-grid.is-masonry {
     gap: 12px;
