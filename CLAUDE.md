@@ -31,7 +31,7 @@ Three breakpoints in `styles.css`:
 
 ## Known Exceptions
 
-- `.frame-skill p` stays 16px on mobile (does not reduce to 14px like `caption-2`)
+- Nothing on the site drops to 14px. `.caption-2`, `.project-label` and `.frame-skill p` are all 16px at every breakpoint. (Older notes claimed a 16→14 mobile step for `caption-2`; the live CSS does not do this.)
 - Port 3000 is used by a different project (Prompt Library). Use a different port for the preview server.
 
 ## Critical Rules (do not break these)
@@ -91,25 +91,54 @@ Three breakpoints in `styles.css`:
     └── workflow-claudecode.mp4  # Claude Code workflow (24MB)
 ```
 
-## Design Tokens (from Figma)
+## Design Tokens
 
-### Typography (desktop / mobile)
-- `h1/` — 64px / 32px (used by `.hero-text h1`, `.portfolio-header h1`, `.about-headline`)
-- `h2/` — 38px / 32px (used by `.project-title`, `.heading`, `.about-skill-title`)
-- `body/` — 20px / 18px (set on `body`, inherited by `.body-copy`, `.portfolio-intro`, `.say-hi-text`)
-- `caption-2/` — 16px / 14px (used by `.caption-2`, `.project-label`)
-- `link/` — 16px, weight 400, letter-spacing -0.72
-- `caption/` — 16px, weight 300, letter-spacing -0.72
+> **The live site is the single source of truth.** https://whatareyouuptoday.com (i.e. `styles.css` in
+> this repo) defines the design system. Figma, the Storybook in `design-token-pipeline`, the Claude
+> Design system, and this file all follow it. Never change the site to match a token file; change the
+> token file. The scale below was read off the live stylesheet, not transcribed from Figma.
+
+### Typography — full live scale (desktop / tablet 1024 / mobile 768)
+
+| px | Used by | Notes |
+|---|---|---|
+| 64 / 42 / 32 | `.hero-text h1`, `.portfolio-header h1`, `.about-headline` | `h1/`, weight 600, lh 1.2 |
+| 52 | `.imprint-title`, `.about-now-heading` | **no token yet** |
+| 50 / 36 / 30 | `.project-title`, `.say-hi h2`, `.explore-more-heading`, `.footer-links a`, `.portfolio-header .description`, `.mid-text p` | title size, **no Figma token** |
+| 42 | `.mobile-overlay a` (primary links) | secondary overlay links are 24 |
+| 38 | `.heading`, `.about-skill-title` | `h2/`, weight 600 |
+| 24 | `.nav-logo-text`, `.footer-bottom`, overlay Home/Contact | wordmark |
+| 22 / 18 | `.hero-text p`, `.about-body`, `.about-now-body`, `.explore-more-sub`, `.imprint-block h2` | lead paragraph, **no token yet** |
+| 20 / 18 | `body` | `body/`, weight **400** |
+| 18 | `.imprint-block p`, `.imprint-block ul`, `.portfolio-header .subtitle` | |
+| 16 | `.caption-2`, `.caption`, `.caption-3`, `.link-text`, `.nav-links`, `.btn`, `.filter-btn`, `.tag`, `.project-label`, `.frame-skill p`, `.gallery-caption`, `.about-now-label` | `link/` `caption/` `caption-2/` |
+
+**Letter-spacing is always -4.5% of font size** (`-0.045em`), at every size and breakpoint, with no
+exceptions. -2.88px at 64, -2.25px at 50, -1.71px at 38, -0.9px at 20, -0.72px at 16.
+
+**There is no 14px anywhere on the live site.** `.caption-2` and `.project-label` stay **16px on
+mobile**. Any surface showing caption/caption-2 at 14px is wrong.
+
+Line heights: h1/h2/title 1.2, body 1.15, caption 1.25, link/caption-2 1.03, wordmark 1.52.
+Weights: 300 caption, 400 body/link/caption-2/tag/btn, 600 headings/nav links/wordmark.
 
 ### Colors
 - `background` #FFFFFF, `text-primary` #000000, `text-secondary` #313131
 - `accent` #FBFF01, `accent-hover` #E8EC00, `border` #000000
+- `nav-bg-start` rgba(255,255,255,0.95), `nav-bg-end` rgba(255,255,255,0.6) (the nav gradient)
+- Also in use, not yet tokenized: #E9E9E9 (frame-skill and gallery tile backgrounds)
 
 ### Spacing
-- Page: `page-padding` (50), `page-padding-mobile` (20), `content-max-width` (1180)
-- Sections: `hero-padding-top` (200), `section-padding-top` (30), `section-padding-bottom` (80)
+- Page: `page-padding` (50 / 20 mobile), `content-max-width` (1180), `nav-padding` (30 / 20)
+- Hero: `hero-padding-top` (200 / 170), `hero-padding-bottom` (80 / 40)
+- Sections: `section-padding-top` (30), `section-padding-bottom` (80 / 40)
+- Cards: `card-gap` (50 / 30), `card-padding-top` (50), `card-padding-bottom` (80)
+- Footer: `footer-padding-bottom` (80), `footer-links-padding-bottom` (150 / 60)
 - Elements: `element-gap-sm` (12), `element-gap-md` (19), `element-gap-lg` (24), `element-gap-xl` (48)
-- Components: `card-gap` (50), `button-padding-v` (6), `button-padding-h` (10), `border-radius` (4)
+- Components: `button-padding-v` (6), `button-padding-h` (10), `border-radius` (4, media only)
+
+Note: Figma also carries `page-padding-mobile` (20), which is redundant since `page-padding` already
+resolves to 20 in its Mobile mode.
 
 ### Border Radius — scoped, not global
 
