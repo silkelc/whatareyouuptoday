@@ -402,7 +402,8 @@ Grey text box used for short skill/service descriptions within portfolio section
 ### AI Gallery: filter tags
 - Filter bar (`.gallery-filter`) between the intro and the grid, left aligned: All, Portrait, Fashion, Still Life, Character, Abstract, Scenes, Video
 - Each `.gallery-tile` carries `data-tags` (space-separated, e.g. `"still-life video"`); a tile can match several filters. Video tiles all have the `video` tag in addition to a content tag.
-- Chips are `.filter-btn`: white with 1px black border, active chip accent yellow (#FBFF01), hover accent-hover (#E8EC00); typography and padding match `.btn` (16px Rubik 400, -0.72 ls, 6/10 padding, radius 4)
+- Chips are `.filter-btn`: white with 1px black border, active chip accent yellow (#FBFF01), hover accent-hover (#E8EC00). Typography, padding and transition come from the **shared `.btn, .filter-btn` rule** in the Button section, so chips and buttons cannot drift apart. Corners are square (no `border-radius`), matching `.btn` and the gallery tiles.
+- Spacing: `.gallery-filter` sits 48px below the intro (30px mobile), `.gallery-grid` 24px below the filter bar at every breakpoint.
 - Filtering rebuilds the JS masonry with only matching tiles (`build(force)` + `shownTiles()`); tiles get `.visible` on filter change so re-entering tiles skip the reveal animation. Play-on-visible keeps working because the video IntersectionObserver stays subscribed across detach/reattach.
 - No-JS: `.gallery-filter` is hidden via the noscript style block (CSS-columns fallback shows all tiles unfiltered)
 - New tiles need a `data-tags` attribute or they only appear under "All"
