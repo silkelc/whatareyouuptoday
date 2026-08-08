@@ -111,6 +111,39 @@ Three breakpoints in `styles.css`:
 - Elements: `element-gap-sm` (12), `element-gap-md` (19), `element-gap-lg` (24), `element-gap-xl` (48)
 - Components: `card-gap` (50), `button-padding-v` (6), `button-padding-h` (10), `border-radius` (4)
 
+### Border Radius — scoped, not global
+
+`border-radius` (4) is **not** a global component default. It applies to **media containers only**:
+`.project-img`, `.swap-two img`, `.explore-project-img`, and the inline video styles in `agentic.html` / `workflow.html`.
+
+Everything else is **square (no radius)**: buttons (`.btn`), tags (`.tag`), gallery filter chips (`.filter-btn`),
+grey text boxes (`.frame-skill`), and gallery tiles (`.gallery-tile`). The only round element is the
+nav logo dot (`border-radius: 50%`, animated).
+
+Rule: when adding a control, label or tile, give it square corners. Reach for radius 4 only when the
+element frames an image or video.
+
+### The shared control box
+
+Three components share one box spec, defined once in the Button section of `styles.css`:
+
+- padding `6px 10px` (`button-padding-v` / `button-padding-h`)
+- 1px border, square corners
+- `link/` type: 16px Rubik 400, line-height 1.03, letter-spacing -0.72
+- `display: inline-flex`, centered
+
+Variants differ **only in color and behavior**:
+
+| Component | Fill | Border | Role |
+|---|---|---|---|
+| `.btn` | accent `#FBFF01` | accent | link / action |
+| `.tag` | transparent | `#000` | static label (project tags) |
+| `.filter-btn` | `#FFF` | `#000` | filter chip; active = accent fill |
+
+Rule: a new chip-like component **extends the shared `.btn, .filter-btn` rule** and sets only its own
+colors. Never re-declare the typography or padding block. Note `.tag` still carries its own copy and is
+a candidate for folding into the shared rule (it must not inherit `cursor: pointer`, being a static label).
+
 ## Navigation
 
 - Desktop nav: About, AI Gallery, Contact (top right). Homepage omits "Home" link; subpages include Home, About, AI Gallery, Contact.
