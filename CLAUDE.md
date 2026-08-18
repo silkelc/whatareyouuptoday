@@ -187,7 +187,19 @@ Variants differ **only in color and behavior**:
 |---|---|---|---|
 | `.btn` | accent `#FBFF01` | accent | link / action |
 | `.tag` | transparent | `#000` | static label (project tags) |
-| `.filter-btn` | `#FFF` | `#000` | filter chip; active = accent fill |
+| `.filter-btn` | `#FFF` | `#000` | filter chip; active = black fill, white label |
+
+**Hover inverts both controls**: `.btn` and `.filter-btn` go black fill, white label,
+`translateY(-1px)`. The custom cursor deliberately does not grow over them, since the inversion is
+already the hover signal.
+
+`.filter-btn.is-active` is **black, not accent yellow**: yellow belongs to `.btn`, the call to
+action, and a filter chip is a state rather than an action. Hover and selected therefore look the
+same, which is intended: hovering previews what selecting looks like.
+
+Both hover rules are wrapped in `@media (hover: hover)`. On touch, `:hover` sticks after a tap, so
+an ungated rule would leave a tapped filter chip sitting black instead of showing its yellow
+`.is-active` state. Any new hover style that changes more than a shade belongs inside that gate.
 
 Rule: a new chip-like component **extends the shared `.btn, .filter-btn` rule** and sets only its own
 colors. Never re-declare the typography or padding block. Note `.tag` still carries its own copy and is
@@ -340,6 +352,45 @@ Located at `privacy.html`. Current section structure:
 13. Changes to This Privacy Policy
 
 If you add, remove, or change any data-processing functionality on the site, update the privacy policy in the same commit.
+
+## Custom Cursor
+
+Dark circle that trails the pointer and grows over links. `cursor.js` at the repo root, styles at the
+end of `styles.css`, loaded on all 9 pages via `<script defer src="/cursor.js">`.
+
+```html
+<div class="cursor"><span class="cursor-dot"></span></div>  <!-- built by cursor.js -->
+```
+
+- The dot is **white** with `mix-blend-mode: difference`. On the white page that renders black, over
+  black type it knocks the letters out to white, over images and video it inverts them.
+- **Accent yellow is the exception.** Difference inverts, and inverting `#FBFF01` gives blue. Over
+  `.nav-logo-dot` and `.highlight-underline` the cursor drops the blend (`.on-accent` →
+  `mix-blend-mode: normal`), turns solid black and stays at 24px. The yellow is briefly covered,
+  never recoloured. No single dot colour can both darken white and leave yellow alone, so the switch
+  is the only way out. Buttons are not in this list because they no longer stay yellow on hover.
+- **The logo never grows.** `.nav-logo` is in both `ACCENT_TARGETS` and `NO_GROW`, so the cursor
+  stays a small solid black dot across the whole logo, mark and wordmark alike. Growing on the
+  wordmark was tried and reverted: the 72px disc is wider than the gap to the mark, so it reached
+  across and turned the mark blue. The `.on-accent` transition is shortened to 0.15s so a disc
+  arriving from a nav link snaps down rather than lingering on the yellow.
+- **The blend must sit on `.cursor`, not on `.cursor-dot`.** `.cursor` carries the JS transform and
+  `will-change`, which opens a stacking context, so a blend on the inner dot has nothing to blend
+  against and the white dot stays invisible on the white page.
+- Two elements on purpose: `.cursor` takes the position (rAF, lerp 0.18, hence the trail),
+  `.cursor-dot` takes the scale transition. One element would make the CSS transition fight the
+  per-frame transform.
+- 24px idle, `scale(3)` over `a, button, [role="button"]`, `scale(0.75)` on press. **`.btn` and
+  `.filter-btn` are excluded from the growth** (`NO_GROW` in `cursor.js`): they invert to black on
+  hover themselves, and a 72px disc on top would just cover the label they made white.
+  Gallery tiles are deliberately **not** hover targets either: they are `<div>`s, not links.
+- The script bails out entirely (leaving the native cursor) on touch, without JS, and under
+  `forced-colors: active` — high-contrast users have usually customized their system cursor.
+  `prefers-reduced-motion` drops the trail (lerp 1) and the scale transition.
+- `cursor: none` is set via `.cursor-enabled, .cursor-enabled *` (class added by the script). It has
+  to stay last in `styles.css` to win the specificity tie against earlier `cursor: pointer` rules.
+- Contrast note: the black-on-white dot is 21:1. An earlier yellow version was 1.08:1 against the
+  page, which is why the cursor is dark rather than accent-coloured.
 
 ## Frame Skill Component
 

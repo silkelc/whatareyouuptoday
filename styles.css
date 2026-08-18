@@ -283,7 +283,7 @@ img {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .btn {
@@ -291,9 +291,15 @@ img {
   border: 1px solid #fbff01;
 }
 
-.btn:hover {
-  background: #e8ec00;
-  transform: translateY(-1px);
+/* Hover styles are gated: on touch, :hover sticks after a tap, which would leave
+   a tapped button sitting black. */
+@media (hover: hover) {
+  .btn:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+    transform: translateY(-1px);
+  }
 }
 
 /* ==========================================
@@ -1026,15 +1032,23 @@ img {
   border: 1px solid #000;
 }
 
-.filter-btn:hover {
-  background: #e8ec00; /* accent-hover */
-  border-color: #e8ec00;
-  transform: translateY(-1px);
+/* Same black fill as the selected state: hovering previews what selecting looks
+   like. Gated for touch, where :hover sticks after a tap. */
+@media (hover: hover) {
+  .filter-btn:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+    transform: translateY(-1px);
+  }
 }
 
+/* Selected state. Deliberately black rather than accent yellow: yellow belongs
+   to .btn, the call to action, and a filter chip is a state, not an action. */
 .filter-btn.is-active {
-  background: #fbff01; /* accent */
-  border-color: #fbff01;
+  background: #000;
+  border-color: #000;
+  color: #fff;
 }
 
 .gallery-grid {
@@ -1595,5 +1609,89 @@ img {
 
   .imprint-block ul {
     font-size: 16px;
+  }
+}
+
+/* ==========================================
+   Custom Cursor
+   Added by cursor.js on fine pointers only. The dot is white and blends with
+   mix-blend-mode: difference, so it renders black on the white page and knocks
+   out the type, images and video it passes over. Kept last in the file so the
+   `cursor: none` rules win the tie against earlier `cursor: pointer` rules.
+   ========================================== */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: transform;
+  /* The blend belongs on this element, not on the dot inside it: the transform
+     here opens a stacking context, so a blend on the inner dot would have
+     nothing to blend against and the white dot would stay invisible. */
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transform: scale(1);
+  transition: transform 0.35s cubic-bezier(0.22, 0.8, 0.24, 1), opacity 0.25s ease;
+}
+
+.cursor.is-visible .cursor-dot {
+  opacity: 1;
+}
+
+/* Over links and buttons */
+.cursor.is-hover .cursor-dot {
+  transform: scale(3);
+}
+
+.cursor.is-down .cursor-dot {
+  transform: scale(0.75);
+}
+
+.cursor.is-hover.is-down .cursor-dot {
+  transform: scale(2.6);
+}
+
+/* Accent-yellow surfaces: the logo and the marker highlight. Inverting #FBFF01
+   gives blue, so here the dot drops the blend and goes solid black instead.
+   Buttons are not in this list: they fill black on hover, and a black dot on a
+   black button goes invisible and punches a hole through the white label. */
+.cursor.on-accent {
+  mix-blend-mode: normal;
+}
+
+.cursor.on-accent .cursor-dot {
+  background: #000000;
+  /* Snappier than the default: arriving from a link the dot is at 3x, and a slow
+     shrink would park a large black disc on the yellow. */
+  transition: transform 0.15s ease, opacity 0.25s ease;
+}
+
+.cursor.on-accent.is-hover .cursor-dot {
+  transform: scale(1);
+}
+
+.cursor.on-accent.is-hover.is-down .cursor-dot {
+  transform: scale(0.75);
+}
+
+.cursor-enabled,
+.cursor-enabled * {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot {
+    transition: opacity 0.25s ease;
   }
 }
