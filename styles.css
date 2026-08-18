@@ -302,6 +302,17 @@ img {
   }
 }
 
+/* Press state, which is what touch devices get instead of the gated hover.
+   transition: none so a short tap snaps to black rather than easing only part
+   of the way there and back. */
+.btn:active,
+.filter-btn:active {
+  background: #000;
+  border-color: #000;
+  color: #fff;
+  transition: none;
+}
+
 /* ==========================================
    Home — Hero Text
    ========================================== */

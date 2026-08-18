@@ -6,6 +6,12 @@
    growing: the yellow underneath is covered for a moment, never recoloured.
    Desktop pointers only, no-op on touch and without JS. */
 (function () {
+  /* Not cursor related, but this file is the one script every page loads. iOS
+     only applies :active styles when a touch listener exists, and :active is how
+     touch devices get the button press state, since :hover is gated to pointer
+     devices. An empty listener is enough. */
+  document.addEventListener('touchstart', function () {}, { passive: true });
+
   if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   // Forced-colors / high-contrast users have deliberately taken over the
   // palette and usually the system cursor with it. Leave theirs alone.

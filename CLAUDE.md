@@ -197,6 +197,12 @@ already the hover signal.
 action, and a filter chip is a state rather than an action. Hover and selected therefore look the
 same, which is intended: hovering previews what selecting looks like.
 
+Touch devices get the same black fill through `:active` (ungated), since the hover rules never
+apply there. It carries `transition: none` so a short tap snaps to black instead of easing part of
+the way and back. iOS only applies `:active` when a touch listener exists, so `cursor.js` registers
+an empty `touchstart` listener before its own pointer checks — that line is not cursor related, it
+just lives in the one script every page loads.
+
 Both hover rules are wrapped in `@media (hover: hover)`. On touch, `:hover` sticks after a tap, so
 an ungated rule would leave a tapped filter chip sitting black instead of showing its yellow
 `.is-active` state. Any new hover style that changes more than a shade belongs inside that gate.
