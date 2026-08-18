@@ -39,9 +39,14 @@
      the buttons, and this is that listener. */
   if (!finePointer) {
     var tapping = false;
+    /* Buttons and chips already answer a tap by filling black. A ripple on top
+       is the same signal twice. The logo is not listed: it has no press state of
+       its own, so the ripple is its only feedback. */
+    var NO_RIPPLE = '.btn, .filter-btn';
 
     document.addEventListener('touchstart', function (e) {
       if (reduce) return; // the ripple is decoration, nothing depends on it
+      if (e.target.closest && e.target.closest(NO_RIPPLE)) return;
       var t = e.touches[0];
       if (!t) return;
       tapping = true;

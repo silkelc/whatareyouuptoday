@@ -393,7 +393,9 @@ end of `styles.css`, loaded on all 9 pages via `<script defer src="/cursor.js">`
 - **Touch gets the circle as a tap ripple.** No pointer to follow, so `.is-tap` plays the
   `cursor-tap` keyframes at the touch point: same dot, same difference blend, expanding and fading.
   It holds full opacity through the first third, otherwise the easing fades it out before it reads.
-  A `touchmove` cancels it, so scrolling does not leave ripples. `cursor: none` is never set there —
+  A `touchmove` cancels it, so scrolling does not leave ripples, and `.btn` / `.filter-btn` are
+  skipped since their black `:active` fill already answers the tap (the logo is not skipped: it has
+  no press state of its own). `cursor: none` is never set there —
   the native cursor and tap behaviour are untouched. That touch listener doubles as the one iOS
   needs before it will apply `:active` to the buttons.
 - The script bails out entirely (leaving the native cursor) without JS and under
