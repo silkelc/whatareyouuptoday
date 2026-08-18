@@ -252,8 +252,14 @@ img {
   text-decoration: none;
 }
 
-.mobile-overlay a:hover {
-  text-decoration: underline;
+/* Gated to pointer devices. The overlay is shown by viewport width, so a mouse
+   in a narrow window still gets the underline as an affordance, while on touch
+   it only ever left a stuck underline on the tapped link after the tap. Touch
+   feedback there is the tap ripple. */
+@media (hover: hover) {
+  .mobile-overlay a:hover {
+    text-decoration: underline;
+  }
 }
 
 /* Secondary links (Home, Contact) de-emphasized at the wordmark size */
