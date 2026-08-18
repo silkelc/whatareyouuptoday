@@ -4,20 +4,19 @@
    Difference inverts, and inverting the accent yellow gives blue. So over the
    brand's yellow surfaces the dot drops the blend, turns solid black and stops
    growing: the yellow underneath is covered for a moment, never recoloured.
-   Desktop pointers only, no-op on touch and without JS. */
-(function () {
-  /* Not cursor related, but this file is the one script every page loads. iOS
-     only applies :active styles when a touch listener exists, and :active is how
-     touch devices get the button press state, since :hover is gated to pointer
-     devices. An empty listener is enough. */
-  document.addEventListener('touchstart', function () {}, { passive: true });
 
-  if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+   Touch devices have no pointer to follow, so they get the same circle as a tap
+   ripple: it lands where the finger does, expands and fades. Same dot, same
+   blend, so the effect is recognisably the same on both.
+   No-op without JS. */
+(function () {
+  if (!window.matchMedia) return;
   // Forced-colors / high-contrast users have deliberately taken over the
   // palette and usually the system cursor with it. Leave theirs alone.
   if (window.matchMedia('(forced-colors: active)').matches) return;
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var HOVER_TARGETS = 'a, button, [role="button"]';
   // Buttons and filter chips invert to black on hover, which is hover feedback
   // enough. Growing the dot on top of that would only cover the label. The logo
@@ -34,6 +33,36 @@
   cursor.setAttribute('aria-hidden', 'true');
   cursor.innerHTML = '<span class="cursor-dot"></span>';
   document.body.appendChild(cursor);
+
+  /* Touch: no pointer to follow, so the circle only appears on tap. iOS also
+     needs a touch listener on the page before it will apply :active styles to
+     the buttons, and this is that listener. */
+  if (!finePointer) {
+    var tapping = false;
+
+    document.addEventListener('touchstart', function (e) {
+      if (reduce) return; // the ripple is decoration, nothing depends on it
+      var t = e.touches[0];
+      if (!t) return;
+      tapping = true;
+      cursor.style.transform = 'translate3d(' + t.clientX + 'px,' + t.clientY + 'px,0)';
+      cursor.classList.remove('is-tap');
+      void cursor.offsetWidth; // restart the animation on a repeat tap
+      cursor.classList.add('is-tap');
+    }, { passive: true });
+
+    // A finger that travels is a scroll, not a tap. Drop the ripple.
+    document.addEventListener('touchmove', function () {
+      if (tapping) {
+        tapping = false;
+        cursor.classList.remove('is-tap');
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function () { tapping = false; }, { passive: true });
+    return;
+  }
+
   document.documentElement.classList.add('cursor-enabled');
 
   var tx = window.innerWidth / 2, ty = window.innerHeight / 2;

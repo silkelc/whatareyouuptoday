@@ -1701,8 +1701,36 @@ img {
   cursor: none;
 }
 
+/* Touch tap ripple. Same dot and same blend as the pointer cursor, so a tap on
+   a phone or iPad shows the effect the desktop cursor gives continuously. */
+.cursor.is-tap .cursor-dot {
+  animation: cursor-tap 0.5s cubic-bezier(0.22, 0.8, 0.24, 1) forwards;
+}
+
+/* Stays fully opaque through the first third, so the circle actually reads
+   before it fades. A straight fade-from-1 disappears almost immediately under
+   this easing. */
+@keyframes cursor-tap {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(2.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.4);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor-dot {
     transition: opacity 0.25s ease;
+  }
+
+  .cursor.is-tap .cursor-dot {
+    animation: none;
   }
 }

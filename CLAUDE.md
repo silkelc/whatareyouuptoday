@@ -390,9 +390,15 @@ end of `styles.css`, loaded on all 9 pages via `<script defer src="/cursor.js">`
   `.filter-btn` are excluded from the growth** (`NO_GROW` in `cursor.js`): they invert to black on
   hover themselves, and a 72px disc on top would just cover the label they made white.
   Gallery tiles are deliberately **not** hover targets either: they are `<div>`s, not links.
-- The script bails out entirely (leaving the native cursor) on touch, without JS, and under
+- **Touch gets the circle as a tap ripple.** No pointer to follow, so `.is-tap` plays the
+  `cursor-tap` keyframes at the touch point: same dot, same difference blend, expanding and fading.
+  It holds full opacity through the first third, otherwise the easing fades it out before it reads.
+  A `touchmove` cancels it, so scrolling does not leave ripples. `cursor: none` is never set there —
+  the native cursor and tap behaviour are untouched. That touch listener doubles as the one iOS
+  needs before it will apply `:active` to the buttons.
+- The script bails out entirely (leaving the native cursor) without JS and under
   `forced-colors: active` — high-contrast users have usually customized their system cursor.
-  `prefers-reduced-motion` drops the trail (lerp 1) and the scale transition.
+  `prefers-reduced-motion` drops the trail (lerp 1), the scale transition, and the tap ripple.
 - `cursor: none` is set via `.cursor-enabled, .cursor-enabled *` (class added by the script). It has
   to stay last in `styles.css` to win the specificity tie against earlier `cursor: pointer` rules.
 - Contrast note: the black-on-white dot is 21:1. An earlier yellow version was 1.08:1 against the
