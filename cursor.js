@@ -39,10 +39,13 @@
      the buttons, and this is that listener. */
   if (!finePointer) {
     var tapping = false;
-    /* Buttons and chips already answer a tap by filling black. A ripple on top
-       is the same signal twice. The logo is not listed: it has no press state of
-       its own, so the ripple is its only feedback. */
-    var NO_RIPPLE = '.btn, .filter-btn';
+    /* Buttons and chips already answer a tap by filling black, so a ripple on
+       top is the same signal twice. The logo is here because the ripple inverts,
+       and inverting the accent yellow gives blue. The whole link is excluded,
+       not just the mark: the ripple expands to roughly 82px, far wider than the
+       gap to the wordmark, so tapping the first letters would still wash blue
+       across the mark. */
+    var NO_RIPPLE = '.btn, .filter-btn, .nav-logo';
 
     document.addEventListener('touchstart', function (e) {
       if (reduce) return; // the ripple is decoration, nothing depends on it
