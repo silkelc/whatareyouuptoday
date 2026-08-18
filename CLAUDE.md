@@ -1,6 +1,6 @@
 # whatareyouuptoday — Project Guide for Claude Code
 
-Last updated: 8 June 2026
+Last updated: 18 August 2026
 
 ## Project Overview
 
@@ -70,6 +70,7 @@ Three breakpoints in `styles.css`:
 ├── imprint.html        # Legal imprint
 ├── 404.html            # Custom not-found page (Vercel auto-serves on unmatched routes)
 ├── styles.css          # Single stylesheet for all pages
+├── cursor.js           # Custom cursor + touch tap ripple (loaded on all 9 pages)
 ├── favicon.ico         # Favicon 32x32
 ├── favicon.svg         # SVG favicon
 ├── favicon-16x16.png   # 16px favicon
@@ -144,7 +145,10 @@ Weights: 300 caption, 400 body/link/caption-2/tag/btn, 600 headings/nav links/wo
 
 ### Colors
 - `background` #FFFFFF, `text-primary` #000000, `text-secondary` #313131
-- `accent` #FBFF01, `accent-hover` #E8EC00, `border` #000000
+- `accent` #FBFF01, `border` #000000
+- `accent-hover` #E8EC00 is **no longer used anywhere on the site.** Its only two users were
+  `.btn:hover` and `.filter-btn:hover`, which now fill black. The token still exists in Figma and
+  should be retired there, or kept only if a future surface needs it.
 - `nav-bg-start` rgba(255,255,255,0.95), `nav-bg-end` rgba(255,255,255,0.6) (the nav gradient)
 - Also in use, not yet tokenized: #E9E9E9 (frame-skill and gallery tile backgrounds)
 
@@ -560,6 +564,36 @@ Grey text box used for short skill/service descriptions within portfolio section
 ## Open Tasks
 
 - AI Gallery: more videos may still arrive (same per-video workflow as above)
+- Cursor: the yellow marker highlight (`.highlight-underline`) can still flash blue when tapped on
+  touch. The tap ripple carries the difference blend and reaches ~82px, so suppressing it only on
+  the marker itself would not be enough, the same geometry problem the logo had. Unresolved by
+  choice, not oversight.
+- Figma: the button and chip states below changed on 18 August 2026 and Figma has not been updated
+  to match (black hover/active fills, retired `accent-hover`).
+
+## Session Log — 18 August 2026
+
+### Custom cursor (new `cursor.js`, PR #32)
+- Trailing circle on desktop pointers: white dot, `mix-blend-mode: difference`, 3x over text links.
+  Full behaviour and the reasoning behind each exception in the **Custom Cursor** section above.
+- Touch gets the same circle as a tap ripple. No ripple on `.btn`, `.filter-btn` or `.nav-logo`.
+- Several approaches were tried and rejected, recorded so they are not retried: an accent-yellow dot
+  (1.08:1 against white), a yellow dot with a black ring (disliked), a black dot over the black
+  button hover (invisible, and it punched a hole through the label), and growing the cursor over the
+  logo wordmark (the disc reached across and turned the mark blue).
+
+### Control states inverted
+- `.btn` and `.filter-btn` hover: black fill, white label (was `accent-hover` #E8EC00).
+- `.filter-btn.is-active`: black fill, white label (was accent #FBFF01). Yellow is reserved for
+  `.btn` as the call to action; a filter chip is a state, not an action.
+- `:active` added ungated so touch gets the same black fill, since the hover rules are now gated.
+
+### Hover rules gated behind `@media (hover: hover)`
+- `.btn:hover`, `.filter-btn:hover`, `.mobile-overlay a:hover`.
+- Reason: on touch `:hover` sticks after a tap. An ungated black fill left a tapped filter chip
+  looking selected, and the overlay kept an underline on the link just tapped.
+- **Rule for anything added later:** a hover style that changes more than a shade belongs inside
+  that gate. Pair it with an ungated `:active` if touch needs the feedback too.
 
 ## Tone and Copy
 
