@@ -1122,6 +1122,25 @@ img {
   transform: none;
 }
 
+/* Two-frame swap tile: the same subject in two renderings, crossfading in
+   place. Reuses the swap-a / swap-b keyframes from the .swap-two component
+   (percentage based, so the 6s duration here just runs them faster).
+   The first frame stays in flow and defines the tile height, which is what
+   the masonry JS measures; the second is laid over it. */
+.gallery-swap {
+  position: relative;
+}
+
+.gallery-swap img + img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-swap img:nth-child(1) { animation: swap-a 6s infinite; }
+.gallery-swap img:nth-child(2) { animation: swap-b 6s infinite; }
+
 @media (max-width: 1024px) {
   .gallery-grid {
     --cols: 2;
@@ -1738,5 +1757,16 @@ img {
 
   .cursor.is-tap .cursor-dot {
     animation: none;
+  }
+
+  /* Hold the swap tile on its first frame instead of cycling. The overlay
+     needs opacity 0 explicitly: with the animation off it would otherwise
+     sit on top at full opacity and hide the frame underneath. */
+  .gallery-swap img {
+    animation: none;
+  }
+
+  .gallery-swap img + img {
+    opacity: 0;
   }
 }
