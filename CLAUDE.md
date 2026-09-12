@@ -557,6 +557,29 @@ Grey text box used for short skill/service descriptions within portfolio section
 - No-JS: `.gallery-filter` is hidden via the noscript style block (CSS-columns fallback shows all tiles unfiltered)
 - New tiles need a `data-tags` attribute or they only appear under "All"
 
+### AI Gallery: swap tiles (two-frame crossfade)
+
+A third tile type alongside `<img>` and the `<video>` poster pattern, for one subject in two
+renderings. First used by tile 25 (Tokyo house: photoreal render ↔ watercolour illustration).
+
+```html
+<div class="gallery-tile reveal" data-tags="scenes"><div class="gallery-swap">
+  <img src="…A.webp" alt="describe the subject and say it alternates" width="1000" height="1785" loading="lazy" decoding="async">
+  <img src="…B.webp" alt="" aria-hidden="true" width="1000" height="1792" loading="lazy" decoding="async">
+</div></div>
+```
+
+- `.gallery-swap` reuses the **`swap-a` / `swap-b` keyframes** from the `.swap-two` component at a
+  6s cycle (the keyframes are percentage based, so only the duration differs). No new keyframes.
+- The **first frame stays in flow and defines the tile height**, which is what the masonry JS
+  measures (`tile.querySelector('img, video')` finds it first). The second is `position:absolute`
+  with `object-fit:cover`, so frames whose aspect ratios differ slightly (1785 vs 1792 here) cover
+  the same box without distortion. Put the frame you want as the still fallback first.
+- Second frame is `alt="" aria-hidden="true"`; the first frame's alt mentions the alternation.
+- Under `prefers-reduced-motion` the tile holds on frame A. The overlay needs an explicit
+  `opacity: 0` there, since with the animation off it would otherwise sit on top at full opacity.
+- Works without JS (pure CSS) and inside filters, like any other tile.
+
 ## Open Tasks
 
 - AI Gallery: more videos may still arrive (same per-video workflow as above)
