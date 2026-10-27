@@ -39,6 +39,7 @@ Three breakpoints in `styles.css`:
 ### Fonts
 - **Never load fonts from external CDNs** (no Google Fonts `<link>` tags, no `@import` from googleapis.com).
 - Rubik is self-hosted at `fonts/rubik-latin.woff2`, loaded via `@font-face` in `styles.css`.
+- Rethink Sans (extra bold, latin only) is self-hosted at `fonts/rethink-sans-latin.woff2`, used for one thing only: the exhibition's title on the green The Unwritten Future badge on the homepage (`.exhibition-badge`), set as the exhibition sets it.
 - If a new font is needed: download the `.woff2` file, place it in `fonts/`, add an `@font-face` declaration. Never link to a CDN.
 - Reason: German GDPR rulings (LG München 2022) make external font loading a legal risk.
 
@@ -77,7 +78,8 @@ Three breakpoints in `styles.css`:
 ├── apple-touch-icon.png # Apple touch icon
 ├── site.webmanifest    # Web app manifest
 ├── fonts/
-│   └── rubik-latin.woff2
+│   ├── rubik-latin.woff2
+│   └── rethink-sans-latin.woff2
 ├── images/
 │   ├── carousel_branding/   # 8 branding slideshow images (01-08-branding.webp)
 │   └── *.webp               # All other images
