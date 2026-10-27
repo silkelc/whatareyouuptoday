@@ -27,6 +27,16 @@
   src: url(fonts/rubik-latin.woff2) format('woff2');
 }
 
+/* Rethink Sans, self-hosted like Rubik: only for the exhibition's title on
+   its badge, set as the exhibition sets it (theunwrittenfuture.art). */
+@font-face {
+  font-family: 'Rethink Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/rethink-sans-latin.woff2) format('woff2');
+}
+
 /* Reset & Base */
 *, *::before, *::after {
   margin: 0;
@@ -346,6 +356,113 @@ img {
 
 .hero-text .btn {
   margin-top: 20px;
+}
+
+/* The exhibition The Unwritten Future (theunwrittenfuture.art), as the green
+   card on its own cover: its green, square, a little off the grid, and now
+   and then it wobbles like a note in a draught. On desktop it hangs at the
+   top right, over the headline, and scrolls away with the page; on tablet
+   and phone it follows the text at the right. */
+.exhibition-badge {
+  width: fit-content;
+  margin-top: 40px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 16px;
+  background: #02f313;
+  color: #000;
+  text-align: right;
+  text-decoration: none;
+  transform: rotate(-6deg);
+  animation: badge-wobble 4.5s ease-in-out 2.4s infinite;
+}
+
+.exhibition-badge-label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.03;
+  letter-spacing: -0.72px;
+  text-transform: uppercase;
+}
+
+/* In the exhibition's own type, as its wordmark: Rethink Sans, extra bold,
+   capitals, not tightened. */
+.exhibition-badge-title {
+  font-family: 'Rethink Sans', 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.exhibition-badge-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.72px;
+  white-space: nowrap;
+}
+
+.exhibition-badge-date svg {
+  flex-shrink: 0;
+  transition: transform 0.5s;
+}
+
+@media (hover: hover) {
+  .exhibition-badge:hover .exhibition-badge-date {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .exhibition-badge:hover .exhibition-badge-date svg {
+    transform: translateX(4px);
+  }
+}
+
+/* The wobble takes the first fifth of each round; the rest it holds still. */
+@keyframes badge-wobble {
+  0%, 20%, 100% { transform: rotate(-6deg); }
+  4%  { transform: rotate(-2deg); }
+  8%  { transform: rotate(-9deg); }
+  12% { transform: rotate(-4deg); }
+  16% { transform: rotate(-7deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exhibition-badge {
+    animation: none;
+  }
+}
+
+/* A step smaller on a phone; the label and date stay at the site's 16. */
+@media (max-width: 768px) {
+  .exhibition-badge {
+    padding: 12px;
+  }
+
+  .exhibition-badge-title {
+    font-size: 20px;
+  }
+}
+
+/* Placed on the page itself, above the nav (z-index 200): its right edge on
+   the content's, or, where the window is too narrow for that, 300 px in from
+   the window's edge, so it stays clear of the nav links. */
+@media (min-width: 1025px) {
+  .exhibition-badge {
+    position: absolute;
+    top: 40px;
+    right: max(calc((100vw - 1180px) / 2), 300px);
+    z-index: 201;
+    margin: 0;
+  }
 }
 
 /* ==========================================
